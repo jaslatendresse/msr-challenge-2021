@@ -35,7 +35,7 @@ def create_table(conn, create_table_sql):
 def main():
     database = r"../sqlite/db/sstubs.db"
     
-    with open('../MSR/sstubs.json') as json_file:
+    with open('docs/sstubs.json') as json_file:
         json_data = json.loads(json_file.read())
 
         columns = []
