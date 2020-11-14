@@ -51,3 +51,34 @@ To obtain high quality datasets, java projects with high popularity were selecte
 - What is the reason for introducing those bugs? (Refactoring, another bug fix, fixing a failing test, fixing CI failure...) 
 - If the bug was caught by CI, was it fixed? 
 - How many commits are there between the bug fix and when it was first introduced? 
+
+## Example
+Here is an example of a query that can be run on the dataset
+`SELECT * FROM commits WHERE bugType = 'CHANGE_OPERATOR`
+The output seen from sqlite studio (for better formatting) (also this is not the full output, this is just for example purposes) 
+```
+CHANGE_OPERATOR	0095d1d5839085cb2d299a0956a22e7b2958688f	84be87ec8b76a97d617f5d72094dc9aaca8621e8	presto-main/src/main/java/com/facebook/presto/operator/MultiChannelGroupByHash.java
+CHANGE_OPERATOR	02f92e681b223c753cca7d9d81fe2308c632a3fb	fe34140b16ddb59602c952aa865cd206406ca189	modules/cpr/src/main/java/org/atmosphere/cpr/DefaultBroadcasterFactory.java
+CHANGE_OPERATOR	03f8d3772fcdcd84ef8b8edd4a8e3cdc1e0c03df	645f80971f44f43c357a795a65b12ceda9fe1a25	runtime/Java/src/org/antlr/v4/runtime/UnbufferedCharStream.java
+CHANGE_OPERATOR	040743693ffbcf226dca01371b4a2d47a75e7511	4e833d0b5a2b266532cd6a450948ae1615c64240	enterprise/ha/src/main/java/org/neo4j/kernel/ha/MasterImpl.java
+CHANGE_OPERATOR	041225c3f286c8fb8bf59cb5fa2f686ea7903ade	a8d708ea1b271e9a03d7a96408e7db17c42b2586	parse/src/main/java/com/alibaba/otter/canal/parse/inbound/AbstractEventParser.java
+CHANGE_OPERATOR	04a010c8499fbc96b1e5a99bdbebaf0b38d24586	d5b978271f13513ccb20a7f3b1393e6dd4331d0d	gdx/src/com/badlogic/gdx/utils/Array.java
+CHANGE_OPERATOR	04a010c8499fbc96b1e5a99bdbebaf0b38d24586	d5b978271f13513ccb20a7f3b1393e6dd4331d0d	gdx/src/com/badlogic/gdx/utils/BooleanArray.java
+CHANGE_OPERATOR	04a010c8499fbc96b1e5a99bdbebaf0b38d24586	d5b978271f13513ccb20a7f3b1393e6dd4331d0d	gdx/src/com/badlogic/gdx/utils/BooleanArray.java
+CHANGE_OPERATOR	04a010c8499fbc96b1e5a99bdbebaf0b38d24586	d5b978271f13513ccb20a7f3b1393e6dd4331d0d	gdx/src/com/badlogic/gdx/utils/CharArray.java
+CHANGE_OPERATOR	04a010c8499fbc96b1e5a99bdbebaf0b38d24586	d5b978271f13513ccb20a7f3b1393e6dd4331d0d	gdx/src/com/badlogic/gdx/utils/CharArray.java
+CHANGE_OPERATOR	04a010c8499fbc96b1e5a99bdbebaf0b38d24586	d5b978271f13513ccb20a7f3b1393e6dd4331d0d	gdx/src/com/badlogic/gdx/utils/FloatArray.java
+CHANGE_OPERATOR	04a010c8499fbc96b1e5a99bdbebaf0b38d24586	d5b978271f13513ccb20a7f3b1393e6dd4331d0d	gdx/src/com/badlogic/gdx/utils/FloatArray.java
+CHANGE_OPERATOR	04a010c8499fbc96b1e5a99bdbebaf0b38d24586	d5b978271f13513ccb20a7f3b1393e6dd4331d0d	gdx/src/com/badlogic/gdx/utils/IntArray.java
+CHANGE_OPERATOR	04a010c8499fbc96b1e5a99bdbebaf0b38d24586	d5b978271f13513ccb20a7f3b1393e6dd4331d0d	gdx/src/com/badlogic/gdx/utils/IntArray.java
+CHANGE_OPERATOR	04a010c8499fbc96b1e5a99bdbebaf0b38d24586	d5b978271f13513ccb20a7f3b1393e6dd4331d0d	gdx/src/com/badlogic/gdx/utils/LongArray.java
+CHANGE_OPERATOR	04a010c8499fbc96b1e5a99bdbebaf0b38d24586	d5b978271f13513ccb20a7f3b1393e6dd4331d0d	gdx/src/com/badlogic/gdx/utils/LongArray.java
+CHANGE_OPERATOR	04a010c8499fbc96b1e5a99bdbebaf0b38d24586	d5b978271f13513ccb20a7f3b1393e6dd4331d0d	gdx/src/com/badlogic/gdx/utils/ShortArray.java
+CHANGE_OPERATOR	04a010c8499fbc96b1e5a99bdbebaf0b38d24586	d5b978271f13513ccb20a7f3b1393e6dd4331d0d	gdx/src/com/badlogic/gdx/utils/ShortArray.java
+CHANGE_OPERATOR	05525065b2098f17217c31298a156d6ee44494fb	e10cc133f582eaa131b0319989094c9e48c3d024	src/main/java/org/jboss/netty/util/internal/jzlib/Inflate.java
+CHANGE_OPERATOR	05525065b2098f17217c31298a156d6ee44494fb	e10cc133f582eaa131b0319989094c9e48c3d024	src/main/java/org/jboss/netty/util/internal/jzlib/Inflate.java
+...
+```
+
+
+
