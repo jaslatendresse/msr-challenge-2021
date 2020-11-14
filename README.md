@@ -54,7 +54,9 @@ To obtain high quality datasets, java projects with high popularity were selecte
 
 ## Example
 Here is an example of a query that can be run on the dataset
+
 `SELECT * FROM commits WHERE bugType = 'CHANGE_OPERATOR`
+
 The output seen from sqlite studio (for better formatting) (also this is not the full output, this is just for example purposes) 
 ```
 CHANGE_OPERATOR	0095d1d5839085cb2d299a0956a22e7b2958688f	84be87ec8b76a97d617f5d72094dc9aaca8621e8	presto-main/src/main/java/com/facebook/presto/operator/MultiChannelGroupByHash.java
