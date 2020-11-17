@@ -56,6 +56,8 @@ To obtain high quality datasets, java projects with high popularity were selecte
 To answer some of those questions, we need more data. For example, CI data. Then, this data will need to be restricted to a certain CI tool (Travis, for example). 
 Make a comparison between projects using CI and projects not using CI --> efficiency of the bug detection/fix (in terms of effort) 
 
+Rather, the bugs caught by CI vs the ones not caught by CI --> fixed faster? How long did they stay in the code base? 
+
 ## Example
 Here is an example of a query that can be run on the dataset
 
