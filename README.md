@@ -59,7 +59,9 @@ Make a comparison between projects using CI and projects not using CI --> effici
 ## Example
 Here is an example of a query that can be run on the dataset
 
-`SELECT * FROM commits WHERE bugType = 'CHANGE_OPERATOR'
+```
+SELECT * FROM commits WHERE bugType = 'CHANGE_OPERATOR'
+```
 
 The output seen from sqlite studio (for better formatting) (also this is not the full output, this is just for example purposes) 
 ```
