@@ -34,7 +34,7 @@ To obtain high quality datasets, java projects with high popularity were selecte
 ## Meta on the commits
 - Bugs in test code are not included in this dataset.
 - Commits in the dataset are not restricted to those that have a failing test case.
-- Unit tested code does not appear to be associated with fewer failures while increased coverage is associated with more failures. 
+- **Unit tested code does not appear to be associated with fewer failures while increased coverage is associated with more failures.** 
 - Commits in which the code compiles before and after the bug was located and repaired. 
 - Commits which make a multiple-statement change at any single position are excluded. 
 - Commits that make single-line modifications at more than one position in the same file are included. 
@@ -46,16 +46,20 @@ To obtain high quality datasets, java projects with high popularity were selecte
 - How long before the bug is found? 
 - Why are those bugs being introduced? 
 - Is the code affected by the bug covered by any test case? 
-- Could CI capture those bugs? 
-- How many of the bugs were captured by CI? 
+- **Could CI capture those bugs?** 
+- **How many of the bugs were captured by CI?**
 - What is the reason for introducing those bugs? (Refactoring, another bug fix, fixing a failing test, fixing CI failure...) 
-- If the bug was caught by CI, was it fixed? 
+- **If the bug was caught by CI, was it fixed (immediately, ignored, etc...)?**
 - How many commits are there between the bug fix and when it was first introduced? 
+- **If some bugs are not linked to failing test cases, how were they detected?**
+
+To answer some of those questions, we need more data. For example, CI data. Then, this data will need to be restricted to a certain CI tool (Travis, for example). 
+Make a comparison between projects using CI and projects not using CI --> efficiency of the bug detection/fix (in terms of effort) 
 
 ## Example
 Here is an example of a query that can be run on the dataset
 
-`SELECT * FROM commits WHERE bugType = 'CHANGE_OPERATOR`
+`SELECT * FROM commits WHERE bugType = 'CHANGE_OPERATOR'
 
 The output seen from sqlite studio (for better formatting) (also this is not the full output, this is just for example purposes) 
 ```
@@ -81,6 +85,5 @@ CHANGE_OPERATOR	05525065b2098f17217c31298a156d6ee44494fb	e10cc133f582eaa131b0319
 CHANGE_OPERATOR	05525065b2098f17217c31298a156d6ee44494fb	e10cc133f582eaa131b0319989094c9e48c3d024	src/main/java/org/jboss/netty/util/internal/jzlib/Inflate.java
 ...
 ```
-
 
 
