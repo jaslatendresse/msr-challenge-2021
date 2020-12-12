@@ -88,16 +88,16 @@ def create_travistorrent_names_table(names_json, database):
                 values.append(list(value))
                 value.clear()
 
-        sql_create_commits_table = "create table if not exists names ({0})".format(" text,".join(columns))
+        sql_create_names_table = "create table if not exists names ({0})".format(" text,".join(columns))
 
-        sql_insert_commits = "insert into names ({0}) values (?{1})".format(",".join(columns), ",?" * (len(columns)-1))
+        sql_insert_names = "insert into names ({0}) values (?{1})".format(",".join(columns), ",?" * (len(columns)-1))
         # create a database connection
         conn = create_connection(database)
         c = conn.cursor()
         # create tables
         if conn is not None:
-            c.execute(sql_create_commits_table)
-            c.executemany(sql_insert_commits, values)
+            c.execute(sql_create_names_table)
+            c.executemany(sql_insert_names, values)
             values.clear()
             conn.commit()
             conn.close()
