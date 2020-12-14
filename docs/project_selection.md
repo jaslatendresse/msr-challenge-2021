@@ -303,10 +303,13 @@ It is difficult to know if all commits are covered by CI. Once we narrow down th
 
 Yields 62,985 Travis builds. 
 
+**Step 2 -- Query Sstubs dataset to collect all builds from projects we selected**
+`SELECT * FROM commits WHERE projectName IN ('Graylog2.graylog2-server', 'apache.flink', 'apache.storm', 'aws.aws-sdk-java', 'brettwooldridge.HikariCP', 'brianfrankcooper.YCSB', 'checkstyle.checkstyle', 'code4craft.webmagic', 'deeplearning4j.deeplearning4j', 'dropwizard.dropwizard', 'dropwizard.metrics', 'druid-io.druid', 'facebook.presto', 'google.auto', 'google.closure-compiler', 'google.guava', 'google.guice', 'iluwatar.java-design-patterns', 'javaee-samples.javaee7-samples', 'jhy.jsoup', 'joelittlejohn.jsonschema2pojo', 'junit-team.junit', 'knightliao.disconf', 'mybatis.mybatis-3', 'naver.pinpoint', 'perwendel.spark', 'roboguice.roboguice', 'springside.springside4', 'square.dagger', 'square.javapoet', 'square.okhttp', 'square.retrofit', 'thinkaurelius.titan', 'xetorthio.jedis')`
+
+Yields 13,870 commits
+
+**Step 3 -- Find out if Sstubs commits are in TravisTorrent builds**
 
 
-
-
-Filter the list according to the requirements by querying the TravisTorrent dataset. 
 
 
