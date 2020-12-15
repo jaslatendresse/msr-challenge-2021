@@ -327,27 +327,107 @@ It is difficult to know if all commits are covered by CI. Once we narrow down th
 4. Create new table with sstubs commits that are also in travis torrent. 
 
 ## Phase 3
-Threshold for the number of distinct bugType: 
+Threshold for the number of distinct bugType: at least 10
+
+<table>
+<thead>
+  <tr>
+    <th>Projects both in Sstubs and TravisTorrent</th>
+    <th>Project Age</th>
+    <th>Travis History</th>
+    <th>Still using Travis?</th>
+    <th>Nb of (distinct) bugType</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>Graylog2.graylog2-server</td>
+    <td>10 years</td>
+    <td>8 years</td>
+    <td>no</td>
+    <td>12</td>
+  </tr>
+  <tr>
+    <td>apache.flink</td>
+    <td>8 years</td>
+    <td>7 years</td>
+    <td>no</td>
+    <td>15</td>
+  </tr>
+  <tr>
+    <td>apache.storm</td>
+    <td>9 years</td>
+    <td>5 years</td>
+    <td>yes</td>
+    <td>12</td>
+  </tr>
+  <tr>
+    <td>checkstyle.checkstyle</td>
+    <td>20 years</td>
+    <td>7 years</td>
+    <td>yes</td>
+    <td>12</td>
+  </tr>
+  <tr>
+    <td>druid-io.druid</td>
+    <td>8 years</td>
+    <td>6 years</td>
+    <td>yes</td>
+    <td>14</td>
+  </tr>
+  <tr>
+    <td>facebook.presto</td>
+    <td>8 years</td>
+    <td>7 years</td>
+    <td>yes</td>
+    <td>15</td>
+  </tr>
+  <tr>
+    <td>google.closure-compiler</td>
+    <td>11 years</td>
+    <td>6 years</td>
+    <td>no</td>
+    <td>15</td>
+  </tr>
+  <tr>
+    <td>xetorthio.jedis</td>
+    <td>10 years</td>
+    <td>6 years</td>
+    <td>no</td>
+    <td>10</td>
+  </tr>
+</tbody>
+</table>
 
 ## Phase 4
 **Step 1 -- Query TravisTorrent dataset to collect all commits from projects we selected**
 
-`SELECT * from travistorrent-bq.data.2017_01_11 WHERE gh_project_name IN ('Graylog2/graylog2-server', 'apache/flink', 'apache/storm', 
-'aws/aws-sdk-java', 'brettwooldridge/HikariCP', 'brianfrankcooper/YCSB', 'checkstyle/checkstyle', 'code4craft/webmagic', 'dropwizard/dropwizard', 'dropwizard/metrics', 'druid-io/druid', 'facebook/presto', 
-'google/auto', 'google/closure-compiler', 'google/guava', 'google/guice', 'iluwatar/java-design-patterns', 
-'javaee-samples/javaee7-samples', 'jhy/jsoup', 'joelittlejohn/jsonschema2pojo', 'junit-team/junit', 
-'knightliao/disconf', 'mybatis/mybatis-3', 'naver/pinpoint', 'perwendel/spark', 'roboguice/roboguice', 
-'springside/springside4', 'square/dagger', 'square/javapoet', 'square/okhttp', 'square/retrofit', 
-'thinkaurelius/titan', 'xetorthio/jedis')`
+Query for each project to avoid API limitation. Save each result to JSON file and dump through Python pipeline to go into our SQLite database. 
 
-Yields 62,985 Travis builds. 
+`SELECT * from travistorrent-bq.data.2017_01_11 WHERE gh_project_name = 'Graylog2/graylog2-server'`
+
+`SELECT * from travistorrent-bq.data.2017_01_11 WHERE gh_project_name = 'apache/flink'`
+
+`SELECT * from travistorrent-bq.data.2017_01_11 WHERE gh_project_name = 'apache/storm'`
+
+`SELECT * from travistorrent-bq.data.2017_01_11 WHERE gh_project_name = 'checkstyle/checkstyle'`
+
+`SELECT * from travistorrent-bq.data.2017_01_11 WHERE gh_project_name = 'druid-io/druid'`
+
+`SELECT * from travistorrent-bq.data.2017_01_11 WHERE gh_project_name = 'facebook/presto'`
+
+`SELECT * from travistorrent-bq.data.2017_01_11 WHERE gh_project_name = 'google/closure-compiler'`
+
+`SELECT * from travistorrent-bq.data.2017_01_11 WHERE gh_project_name = 'xetorthio/jedis'`
+ 
 
 **Step 2 -- Query Sstubs dataset to collect all builds from projects we selected**
-`SELECT * FROM commits WHERE projectName IN ('Graylog2.graylog2-server', 'apache.flink', 'apache.storm', 'aws.aws-sdk-java', 'brettwooldridge.HikariCP', 'brianfrankcooper.YCSB', 'checkstyle.checkstyle', 'code4craft.webmagic', 'deeplearning4j.deeplearning4j', 'dropwizard.dropwizard', 'dropwizard.metrics', 'druid-io.druid', 'facebook.presto', 'google.auto', 'google.closure-compiler', 'google.guava', 'google.guice', 'iluwatar.java-design-patterns', 'javaee-samples.javaee7-samples', 'jhy.jsoup', 'joelittlejohn.jsonschema2pojo', 'junit-team.junit', 'knightliao.disconf', 'mybatis.mybatis-3', 'naver.pinpoint', 'perwendel.spark', 'roboguice.roboguice', 'springside.springside4', 'square.dagger', 'square.javapoet', 'square.okhttp', 'square.retrofit', 'thinkaurelius.titan', 'xetorthio.jedis')`
 
-Yields 13,870 commits
+
 
 **Step 3 -- Find out if Sstubs commits are in TravisTorrent builds**
+
+
 
 
 
