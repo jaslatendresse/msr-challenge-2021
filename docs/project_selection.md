@@ -64,225 +64,261 @@ Filter the list according to the requirements: manual verification of the GitHub
 - `.travis.yml` history
 - Initial commit
 - Current CI pipeline
+- Number of distinct bugType 
 
-<table class="tg">
+<table>
 <thead>
   <tr>
-    <th class="tg-fymr">Projects both in Sstubs and TravisTorrent</th>
-    <th class="tg-fymr">Project Age</th>
-    <th class="tg-fymr">Travis History</th>
-    <th class="tg-fymr">Still using Travis?</th>
+    <th>Projects both in Sstubs and TravisTorrent</th>
+    <th>Project Age</th>
+    <th>Travis History</th>
+    <th>Still using Travis?</th>
+    <th>Nb of (distinct) bugType</th>
   </tr>
 </thead>
 <tbody>
   <tr>
-    <td class="tg-fymr">Graylog2.graylog2-server</td>
-    <td class="tg-0pky">10 years</td>
-    <td class="tg-0pky">8 years</td>
-    <td class="tg-0pky">no</td>
+    <td>Graylog2.graylog2-server</td>
+    <td>10 years</td>
+    <td>8 years</td>
+    <td>no</td>
+    <td>12</td>
   </tr>
   <tr>
-    <td class="tg-fymr">apache.flink</td>
-    <td class="tg-0pky">8 years</td>
-    <td class="tg-0pky">7 years</td>
-    <td class="tg-0pky">no</td>
+    <td>apache.flink</td>
+    <td>8 years</td>
+    <td>7 years</td>
+    <td>no</td>
+    <td>15</td>
   </tr>
   <tr>
-    <td class="tg-fymr">apache.storm</td>
-    <td class="tg-0pky">9 years</td>
-    <td class="tg-0pky">5 years</td>
-    <td class="tg-0pky">yes</td>
+    <td>apache.storm</td>
+    <td>9 years</td>
+    <td>5 years</td>
+    <td>yes</td>
+    <td>12</td>
   </tr>
   <tr>
-    <td class="tg-fymr">aws.aws-sdk-java</td>
-    <td class="tg-0pky">11 years</td>
-    <td class="tg-0pky">7 years</td>
-    <td class="tg-0pky">yes</td>
+    <td>aws.aws-sdk-java</td>
+    <td>11 years</td>
+    <td>7 years</td>
+    <td>yes</td>
+    <td>6</td>
   </tr>
   <tr>
-    <td class="tg-fymr">brettwooldridge.HikariCP</td>
-    <td class="tg-0pky">7 years<br></td>
-    <td class="tg-0pky">7 years</td>
-    <td class="tg-0pky">yes</td>
+    <td>brettwooldridge.HikariCP</td>
+    <td>7 years<br></td>
+    <td>7 years</td>
+    <td>yes</td>
+    <td>9</td>
   </tr>
   <tr>
-    <td class="tg-fymr">brianfrankcooper.YCSB</td>
-    <td class="tg-0pky">11 years</td>
-    <td class="tg-0pky">6 years</td>
-    <td class="tg-0pky">yes</td>
+    <td>brianfrankcooper.YCSB</td>
+    <td>11 years</td>
+    <td>6 years</td>
+    <td>yes</td>
+    <td>7</td>
   </tr>
   <tr>
-    <td class="tg-fymr">checkstyle.checkstyle</td>
-    <td class="tg-0pky">20 years</td>
-    <td class="tg-0pky">7 years</td>
-    <td class="tg-0pky">yes</td>
+    <td>checkstyle.checkstyle</td>
+    <td>20 years</td>
+    <td>7 years</td>
+    <td>yes</td>
+    <td>12</td>
   </tr>
   <tr>
-    <td class="tg-fymr">code4craft.webmagic</td>
-    <td class="tg-0pky">8 years</td>
-    <td class="tg-0pky">7 years</td>
-    <td class="tg-0pky">yes</td>
+    <td>code4craft.webmagic</td>
+    <td>8 years</td>
+    <td>7 years</td>
+    <td>yes</td>
+    <td>5</td>
   </tr>
   <tr>
-    <td class="tg-fymr">deeplearning4j.deeplearning4j</td>
-    <td class="tg-0pky">-</td>
-    <td class="tg-0pky">-</td>
-    <td class="tg-0pky">-</td>
+    <td>deeplearning4j.deeplearning4j</td>
+    <td>-</td>
+    <td>-</td>
+    <td>-</td>
+    <td></td>
   </tr>
   <tr>
-    <td class="tg-fymr">dropwizard.dropwizard</td>
-    <td class="tg-0pky">9 years</td>
-    <td class="tg-0pky">7 years</td>
-    <td class="tg-0pky">yes</td>
+    <td>dropwizard.dropwizard</td>
+    <td>9 years</td>
+    <td>7 years</td>
+    <td>yes</td>
+    <td>7</td>
   </tr>
   <tr>
-    <td class="tg-fymr">dropwizard.metrics</td>
-    <td class="tg-0pky">9 years</td>
-    <td class="tg-0pky">7 years</td>
-    <td class="tg-0pky">yes</td>
+    <td>dropwizard.metrics</td>
+    <td>9 years</td>
+    <td>7 years</td>
+    <td>yes</td>
+    <td>8</td>
   </tr>
   <tr>
-    <td class="tg-fymr">druid-io.druid</td>
-    <td class="tg-0pky">8 years</td>
-    <td class="tg-0pky">6 years</td>
-    <td class="tg-0pky">yes</td>
+    <td>druid-io.druid</td>
+    <td>8 years</td>
+    <td>6 years</td>
+    <td>yes</td>
+    <td>14</td>
   </tr>
   <tr>
-    <td class="tg-fymr">facebook.presto</td>
-    <td class="tg-0pky">8 years</td>
-    <td class="tg-0pky">7 years</td>
-    <td class="tg-0pky">yes</td>
+    <td>facebook.presto</td>
+    <td>8 years</td>
+    <td>7 years</td>
+    <td>yes</td>
+    <td>15</td>
   </tr>
   <tr>
-    <td class="tg-fymr">google.auto</td>
-    <td class="tg-0pky">8 years</td>
-    <td class="tg-0pky">7 years</td>
-    <td class="tg-0pky">yes</td>
+    <td>google.auto</td>
+    <td>8 years</td>
+    <td>7 years</td>
+    <td>yes</td>
+    <td>5</td>
   </tr>
   <tr>
-    <td class="tg-fymr">google.closure-compiler</td>
-    <td class="tg-0pky">11 years</td>
-    <td class="tg-0pky">6 years</td>
-    <td class="tg-0pky">no</td>
+    <td>google.closure-compiler</td>
+    <td>11 years</td>
+    <td>6 years</td>
+    <td>no</td>
+    <td>15</td>
   </tr>
   <tr>
-    <td class="tg-fymr">google.guava</td>
-    <td class="tg-0pky">11 years</td>
-    <td class="tg-0pky">6 years</td>
-    <td class="tg-0pky">yes</td>
+    <td>google.guava</td>
+    <td>11 years</td>
+    <td>6 years</td>
+    <td>yes</td>
+    <td>8</td>
   </tr>
   <tr>
-    <td class="tg-fymr">google.guice</td>
-    <td class="tg-0pky">15 years</td>
-    <td class="tg-0pky">6 years</td>
-    <td class="tg-0pky">yes</td>
+    <td>google.guice</td>
+    <td>15 years</td>
+    <td>6 years</td>
+    <td>yes</td>
+    <td>7</td>
   </tr>
   <tr>
-    <td class="tg-fymr">iluwatar.java-design-patterns</td>
-    <td class="tg-0pky">6 years</td>
-    <td class="tg-0pky">6 years</td>
-    <td class="tg-0pky">no</td>
+    <td>iluwatar.java-design-patterns</td>
+    <td>6 years</td>
+    <td>6 years</td>
+    <td>no</td>
+    <td>2</td>
   </tr>
   <tr>
-    <td class="tg-fymr">javaee-samples.javaee7-samples</td>
-    <td class="tg-0pky">7 year</td>
-    <td class="tg-0pky">6 years</td>
-    <td class="tg-0pky">yes</td>
+    <td>javaee-samples.javaee7-samples</td>
+    <td>7 year</td>
+    <td>6 years</td>
+    <td>yes</td>
+    <td>4</td>
   </tr>
   <tr>
-    <td class="tg-fymr">jhy.jsoup</td>
-    <td class="tg-0pky">10 years</td>
-    <td class="tg-0pky">6 years</td>
-    <td class="tg-0pky">no</td>
+    <td>jhy.jsoup</td>
+    <td>10 years</td>
+    <td>6 years</td>
+    <td>no</td>
+    <td>6</td>
   </tr>
   <tr>
-    <td class="tg-fymr">joelittlejohn.jsonschema2pojo</td>
-    <td class="tg-0pky">10 years</td>
-    <td class="tg-0pky">7 years</td>
-    <td class="tg-0pky">yes</td>
+    <td>joelittlejohn.jsonschema2pojo</td>
+    <td>10 years</td>
+    <td>7 years</td>
+    <td>yes</td>
+    <td>4</td>
   </tr>
   <tr>
-    <td class="tg-fymr">junit-team.junit</td>
-    <td class="tg-0pky">19 years</td>
-    <td class="tg-0pky">7 years</td>
-    <td class="tg-0pky">yes</td>
+    <td>junit-team.junit</td>
+    <td>19 years</td>
+    <td>7 years</td>
+    <td>yes</td>
+    <td>7</td>
   </tr>
   <tr>
-    <td class="tg-fymr">knightliao.disconf</td>
-    <td class="tg-0pky">6 years</td>
-    <td class="tg-0pky">6 years</td>
-    <td class="tg-0pky">yes</td>
+    <td>knightliao.disconf</td>
+    <td>6 years</td>
+    <td>6 years</td>
+    <td>yes</td>
+    <td>1</td>
   </tr>
   <tr>
-    <td class="tg-fymr">mybatis.mybatis-3</td>
-    <td class="tg-0pky">11 years</td>
-    <td class="tg-0pky">7 years</td>
-    <td class="tg-0pky">no</td>
+    <td>mybatis.mybatis-3</td>
+    <td>11 years</td>
+    <td>7 years</td>
+    <td>no</td>
+    <td>8</td>
   </tr>
   <tr>
-    <td class="tg-fymr">naver.pinpoint</td>
-    <td class="tg-0pky">8 years</td>
-    <td class="tg-0pky">5 years</td>
-    <td class="tg-0pky">yes</td>
+    <td>naver.pinpoint</td>
+    <td>8 years</td>
+    <td>5 years</td>
+    <td>yes</td>
+    <td>9</td>
   </tr>
   <tr>
-    <td class="tg-fymr">perwendel.spark</td>
-    <td class="tg-0pky">10 years</td>
-    <td class="tg-0pky">7 years</td>
-    <td class="tg-0pky">yes</td>
+    <td>perwendel.spark</td>
+    <td>10 years</td>
+    <td>7 years</td>
+    <td>yes</td>
+    <td>6</td>
   </tr>
   <tr>
-    <td class="tg-fymr">roboguice.roboguice</td>
-    <td class="tg-0pky">12 years</td>
-    <td class="tg-0pky">8 years</td>
-    <td class="tg-0pky">yes</td>
+    <td>roboguice.roboguice</td>
+    <td>12 years</td>
+    <td>8 years</td>
+    <td>yes</td>
+    <td>2</td>
   </tr>
   <tr>
-    <td class="tg-fymr">springside.springside4</td>
-    <td class="tg-0pky">8 years</td>
-    <td class="tg-0pky">7 years</td>
-    <td class="tg-0pky">yes</td>
+    <td>springside.springside4</td>
+    <td>8 years</td>
+    <td>7 years</td>
+    <td>yes</td>
+    <td>5</td>
   </tr>
   <tr>
-    <td class="tg-fymr">square.dagger</td>
-    <td class="tg-0pky">9 years</td>
-    <td class="tg-0pky">8 years</td>
-    <td class="tg-0pky">yes</td>
+    <td>square.dagger</td>
+    <td>9 years</td>
+    <td>8 years</td>
+    <td>yes</td>
+    <td>1</td>
   </tr>
   <tr>
-    <td class="tg-fymr">square.javapoet</td>
-    <td class="tg-0pky">8 years</td>
-    <td class="tg-0pky">7 years</td>
-    <td class="tg-0pky">yes</td>
+    <td>square.javapoet</td>
+    <td>8 years</td>
+    <td>7 years</td>
+    <td>yes</td>
+    <td>4</td>
   </tr>
   <tr>
-    <td class="tg-fymr">square.okhttp</td>
-    <td class="tg-0pky">9 years</td>
-    <td class="tg-0pky">8 years</td>
-    <td class="tg-0pky">no</td>
+    <td>square.okhttp</td>
+    <td>9 years</td>
+    <td>8 years</td>
+    <td>no</td>
+    <td>4</td>
   </tr>
   <tr>
-    <td class="tg-fymr">square.retrofit</td>
-    <td class="tg-0pky">9 years</td>
-    <td class="tg-0pky">8 years</td>
-    <td class="tg-0pky">no</td>
+    <td>square.retrofit</td>
+    <td>9 years</td>
+    <td>8 years</td>
+    <td>no</td>
+    <td>2</td>
   </tr>
   <tr>
-    <td class="tg-fymr">thinkaurelius.titan</td>
-    <td class="tg-0pky">9 years</td>
-    <td class="tg-0pky">8 years</td>
-    <td class="tg-0pky">no</td>
+    <td>thinkaurelius.titan</td>
+    <td>9 years</td>
+    <td>8 years</td>
+    <td>no</td>
+    <td>7</td>
   </tr>
   <tr>
-    <td class="tg-fymr">xetorthio.jedis</td>
-    <td class="tg-0pky">10 years</td>
-    <td class="tg-0pky">6 years</td>
-    <td class="tg-0pky">no</td>
+    <td>xetorthio.jedis</td>
+    <td>10 years</td>
+    <td>6 years</td>
+    <td>no</td>
+    <td>10</td>
   </tr>
 </tbody>
 </table>
 
-All projects except for deeplearning4j.deeplearning4j seem to be good candidates with rich Travis history. 
+deeplearning4j did not have any build history on Travis, so it will be excluded from further selection phases. 
 
 It is difficult to know if all commits are covered by CI. Once we narrow down the project list, we can: 
 1. Create a smaller TravisTorrent dataset containing the projects we selected. 
@@ -290,7 +326,10 @@ It is difficult to know if all commits are covered by CI. Once we narrow down th
 3. Verify if the sstubs commits are in the travis dataset. 
 4. Create new table with sstubs commits that are also in travis torrent. 
 
+## Phase 3
+Threshold for the number of distinct bugType: 
 
+## Phase 4
 **Step 1 -- Query TravisTorrent dataset to collect all commits from projects we selected**
 
 `SELECT * from travistorrent-bq.data.2017_01_11 WHERE gh_project_name IN ('Graylog2/graylog2-server', 'apache/flink', 'apache/storm', 
@@ -309,6 +348,7 @@ Yields 62,985 Travis builds.
 Yields 13,870 commits
 
 **Step 3 -- Find out if Sstubs commits are in TravisTorrent builds**
+
 
 
 
