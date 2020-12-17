@@ -404,6 +404,8 @@ Threshold for the number of distinct bugType: at least 10
 
 Query for each project to avoid API limitation. Save each result to JSON file and dump through Python pipeline to go into our SQLite database. 
 
+The reason we query for each project is because querying for all 8 project at once results in exceeding the API limit to save the output. 
+
 `SELECT * from travistorrent-bq.data.2017_01_11 WHERE gh_project_name = 'Graylog2/graylog2-server'`
 
 `SELECT * from travistorrent-bq.data.2017_01_11 WHERE gh_project_name = 'apache/flink'`
@@ -420,12 +422,33 @@ Query for each project to avoid API limitation. Save each result to JSON file an
 
 `SELECT * from travistorrent-bq.data.2017_01_11 WHERE gh_project_name = 'xetorthio/jedis'`
  
+From the query results, I created a new table called `travis_builds`.
 
-**Step 2 -- Query Sstubs dataset to collect all builds from projects we selected**
+**Step 2 -- Query Sstubs dataset to collect all commits from projects we selected**
 
+`SELECT * FROM commits WHERE projectName IN ('Graylog2.graylog2-server', 'apache.flink', 'apache.storm', 'checkstyle.checkstyle', 'druid-io.druid', 'facebook.presto', 'google.closure-compiler', 'xetorthio.jedis')`
 
+With the query results, I created a new table called `sstubs_commits`.
+
+After step 1 and step 2, I created a new database to hold the two newly created tables. 
 
 **Step 3 -- Find out if Sstubs commits are in TravisTorrent builds**
+
+For this, I will do a `LEFT JOIN` on the two tables so I get all the columns from `sstubs_commits` and all the columns from `travis_builds`. 
+
+The query verifies that the Sstubs commit (fixCommitSha1 column) is equal to the git_trigger_commit column of a travis build. Then, it verifies that the row is not null for the travis_builds columns by checking that the git_project_name column is not null. 
+
+`SELECT * FROM sstubs_commits LEFT JOIN travis_builds ON sstubs_commits.fixCommitSha1 = travis_builds.git_trigger_commit 
+WHERE travis_builds.gh_project_name IS NOT NULL`
+
+This yields 1,199 rows containing multiple duplicates. This is because there is no unique way to group the results with one column. The only unique combination we can get is by group by (bugType, fixCommitSha1). Since a commit can have multiple bugType, this condition allows us to cover the whole set without having duplicates. 
+
+`SELECT * FROM sstubs_commits LEFT JOIN travis_builds ON sstubs_commits.fixCommitSha1 = travis_builds.git_trigger_commit 
+WHERE travis_builds.gh_project_name IS NOT NULL GROUP BY sstubs_commits.bugType, sstubs_commits.fixCommitSHA1`
+
+This yields 131 bug fixes. New table created with the query results. 
+
+
 
 
 
