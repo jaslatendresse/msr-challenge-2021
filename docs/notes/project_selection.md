@@ -448,9 +448,73 @@ WHERE travis_builds.gh_project_name IS NOT NULL GROUP BY sstubs_commits.bugType,
 
 This yields 131 bug fixes. New table created with the query results. 
 
+## Commit Guru
+All projects EXCEPT apache.flink were either found or added for analysis to Commit Guru. Hence, that leaves us with a total of 7 projects to work with. 
 
+It was impossible to add apache.flink for some odd reasons, the repo could not be found on commit guru and when trying to add it, it did not work. 
 
-
+<table>
+<thead>
+  <tr>
+    <th>Projects in Sstubs, TravisTorrent and Commit Guru</th>
+    <th>Project Age</th>
+    <th>Travis History</th>
+    <th>Still using Travis?</th>
+    <th>Nb of (distinct) bugType</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>Graylog2.graylog2-server</td>
+    <td>10 years</td>
+    <td>8 years</td>
+    <td>no</td>
+    <td>12</td>
+  </tr>
+  <tr>
+    <td>apache.storm</td>
+    <td>9 years</td>
+    <td>5 years</td>
+    <td>yes</td>
+    <td>12</td>
+  </tr>
+  <tr>
+    <td>checkstyle.checkstyle</td>
+    <td>20 years</td>
+    <td>7 years</td>
+    <td>yes</td>
+    <td>12</td>
+  </tr>
+  <tr>
+    <td>druid-io.druid</td>
+    <td>8 years</td>
+    <td>6 years</td>
+    <td>yes</td>
+    <td>14</td>
+  </tr>
+  <tr>
+    <td>facebook.presto</td>
+    <td>8 years</td>
+    <td>7 years</td>
+    <td>yes</td>
+    <td>15</td>
+  </tr>
+  <tr>
+    <td>google.closure-compiler</td>
+    <td>11 years</td>
+    <td>6 years</td>
+    <td>no</td>
+    <td>15</td>
+  </tr>
+  <tr>
+    <td>xetorthio.jedis</td>
+    <td>10 years</td>
+    <td>6 years</td>
+    <td>no</td>
+    <td>10</td>
+  </tr>
+</tbody>
+</table>
 
 
 
