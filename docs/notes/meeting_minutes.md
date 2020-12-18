@@ -47,6 +47,6 @@ Possible tools:
 http://pure.tudelft.nl/ws/portalfiles/portal/46282428/main.pdf or commit guru (docker). 
 
 What we are interested in next: 
-% of commits in MSR dataset (untouched) that have triggered CI builds 
-% of commits that commit guru finds them as bug fixes. 
+- % of commits in MSR dataset (untouched) that have triggered CI builds 
+- % of commits that commit guru finds them as bug fixes. 
 
