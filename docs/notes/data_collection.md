@@ -14,6 +14,11 @@
 
 ## Selected Projects (Sstubs, TravisTorrent, CommitGuru) 
 
+Projects that correspond to the following: 
+- Mature CI usage
+- Use of Travis
+- Have at least 10 distinct bugType 
+
 <table>
 <thead>
   <tr>
@@ -65,7 +70,7 @@ Within the Sstubs dataset, 34 projects are found in the Travis Torrent dataset (
 
 --- The numbers in the section below are subject to change because some Commit Guru data is still missing --- 
 
-### Commits found in Commit Guru from `selected_sstubs`
+## Commits found in Commit Guru from `selected_sstubs`
 
 `SELECT * FROM selected_sstubs LEFT JOIN commit_guru WHERE fixCommitSha1 = commit_hash GROUP BY fixCommitSha1`
 
@@ -75,7 +80,7 @@ Within the Sstubs dataset, 34 projects are found in the Travis Torrent dataset (
 
 **166/830 distinct commits were flagged as "corrective" by Commit Guru**
 
-### Commits found in Commit Guru from `selected_merged` (that also triggered a CI build)
+## Commits found in Commit Guru from `selected_merged` (that also triggered a CI build)
 
 `SELECT * FROM selected_merged LEFT JOIN commit_guru WHERE commit_hash = fixCommitSha1 GROUP BY fixCommitSha1`
 
