@@ -55,7 +55,7 @@
 
 ### Commits found in Commit Guru 
 
-`SELECT projectName, fixCommitSha1, commit_guru.classification FROM msr_table LEFT JOIN commit_guru WHERE commit_guru.commit_hash = msr_table.fixCommitSha1`
+`SELECT projectName, fixCommitSha1, commit_guru.classification FROM selected_merge LEFT JOIN commit_guru WHERE commit_guru.commit_hash = selected_merged.fixCommitSha1`
 
 <table>
 <thead>
@@ -376,6 +376,4 @@
 
 So far, 56/61 (91,2%) commits are flagged as corrective (bug fix) by Commit Guru. 
 
-msr_table (Sstubs+TravisTorrent) contains a total of 98 distinct commits. 
-
-## Commits in Sstubs that have triggered a CI build
+## Commits in `sstubs` that have triggered a CI build
