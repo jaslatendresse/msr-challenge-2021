@@ -1,6 +1,7 @@
 import sqlite3
 from sqlite3 import Error
 import json
+import pandas as pd 
 
 def create_connection(db_file):
     """ create a database connection to the SQLite database
@@ -54,8 +55,8 @@ def create_sstubs_commits_table(selected_sstubs, database):
         else:
             print("Error! cannot create the database connection.")
 
-def create_travis_torrent_table(merged_travis, database):
-    with open(merged_travis) as json_file:
+def create_travis_torrent_table(travis_file, database):
+    with open(travis_file) as json_file:
         json_data = json.loads(json_file.read())
 
         columns = []
@@ -91,12 +92,24 @@ def create_travis_torrent_table(merged_travis, database):
         else:
             print("Error! cannot create the database connection.")
 
+def create_commit_guru_table(commit_guru_file, database):
+    commits = pd.read_csv(commit_guru_file)
+    conn = create_connection(database)
+
+    commits.to_sql('commit_guru', conn, if_exists = 'append', index = False)
+    conn.commit()
+    conn.close()
+
 def main():
     database = r"../sqlite/db/msr_db.db"
     travis_file = 'docs/selected_merged_travis.json'
     sstubs_file = 'docs/selected_sstubs_projects.json'
+    graylog2 = 'docs/commit-guru/graylog2.csv'
+    druid = 'docs/commit-guru/druid-io.csv'
     create_sstubs_commits_table(sstubs_file, database)
     create_travis_torrent_table(travis_file, database)
+    create_commit_guru_table(graylog2, database)
+    create_commit_guru_table(druid, database)
 
 if __name__ == '__main__':
     main()
