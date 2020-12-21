@@ -12,7 +12,7 @@
 
 **commit_guru** - Commits from repositories that are in selected_merged 
 
-## Repositories allIn(Sstubs, TravisTorrent, CommitGuru) 
+## Selected Projects (Sstubs, TravisTorrent, CommitGuru) 
 
 <table>
 <thead>
@@ -53,327 +53,38 @@
 </tbody>
 </table>
 
-### Commits found in Commit Guru 
+## Commits in `selected_sstubs` that have triggered a CI build
 
-`SELECT projectName, fixCommitSha1, commit_guru.classification FROM selected_merge LEFT JOIN commit_guru WHERE commit_guru.commit_hash = selected_merged.fixCommitSha1`
+`SELECT * FROM selected_sstubs LEFT JOIN selected_travis WHERE fixCommitSha1 = git_trigger_commit GROUP BY fixCommitSha1`
 
-<table>
-<thead>
-  <tr>
-    <th>Projects</th>
-    <th>Commit</th>
-    <th>Classification</th>
-  </tr>
-</thead>
-<tbody>
-  <tr>
-    <td>Graylog2.graylog2-server</td>
-    <td>eba7e984d0999606f90689ca3b89ee644b1e92a4</td>
-    <td>Corrective</td>
-  </tr>
-  <tr>
-    <td>Graylog2.graylog2-server</td>
-    <td>08605e65c92ff529290b534ee2de50117953362d</td>
-    <td>Preventative</td>
-  </tr>
-  <tr>
-    <td>Graylog2.graylog2-server</td>
-    <td>1dc7ebfc26b5ef1f88e84702582715eb631202db</td>
-    <td>Corrective</td>
-  </tr>
-  <tr>
-    <td>Graylog2.graylog2-server</td>
-    <td>27bbefef14dfcbaf9048bb9fc92e991bbc4a36fe</td>
-    <td>Corrective</td>
-  </tr>
-  <tr>
-    <td>Graylog2.graylog2-server</td>
-    <td>3a43345ad0a599659d462cfc14dba9d8c0553bbf</td>
-    <td>Corrective</td>
-  </tr>
-  <tr>
-    <td>Graylog2.graylog2-server</td>
-    <td>3cde0f0f90341c21562d893992181650049985b8</td>
-    <td>Corrective</td>
-  </tr>
-  <tr>
-    <td>Graylog2.graylog2-server</td>
-    <td>536a8fa49fc8ce69e42af6004dc328ddc2ded045</td>
-    <td>Corrective</td>
-  </tr>
-  <tr>
-    <td>Graylog2.graylog2-server</td>
-    <td>578bd281f8cb12f46ca902cd2b87b0838a831a90</td>
-    <td>Corrective</td>
-  </tr>
-  <tr>
-    <td>Graylog2.graylog2-server</td>
-    <td>5b4979166050e553fd967e5094509de7975651ec</td>
-    <td>Corrective</td>
-  </tr>
-  <tr>
-    <td>Graylog2.graylog2-server</td>
-    <td>6d5046fb932f43fd55f7e5b53ae27a724681429f</td>
-    <td>Corrective</td>
-  </tr>
-  <tr>
-    <td>Graylog2.graylog2-server</td>
-    <td>700b61dacfe5ed709d08f0fe196563dc55481398</td>
-    <td>Corrective</td>
-  </tr>
-  <tr>
-    <td>Graylog2.graylog2-server</td>
-    <td>7600f7af2ff10b7726557816e86d5af9190cf606</td>
-    <td>None</td>
-  </tr>
-  <tr>
-    <td>Graylog2.graylog2-server</td>
-    <td>7a90cfe13f0b030f6e091154c1d0091c685039f1</td>
-    <td>Corrective</td>
-  </tr>
-  <tr>
-    <td>Graylog2.graylog2-server</td>
-    <td>7efab8ecbdc082c324799aa7e25490a8e0e5520b</td>
-    <td>Corrective</td>
-  </tr>
-  <tr>
-    <td>Graylog2.graylog2-server</td>
-    <td>96a7c11c16fe2a6467cfcf2ed2366dc6cc56924c</td>
-    <td>Corrective</td>
-  </tr>
-  <tr>
-    <td>Graylog2.graylog2-server</td>
-    <td>a161d8d1924d1fb49a4d229370d998be1493957c</td>
-    <td>Corrective</td>
-  </tr>
-  <tr>
-    <td>Graylog2.graylog2-server</td>
-    <td>a2cc06ffec656b532226808c87e32976998c0689</td>
-    <td>Corrective</td>
-  </tr>
-  <tr>
-    <td>Graylog2.graylog2-server</td>
-    <td>a8b6696e713b96d2af3c549f6e26735bb306c6ab</td>
-    <td>Corrective</td>
-  </tr>
-  <tr>
-    <td>Graylog2.graylog2-server</td>
-    <td>da91e33c80c3d417388c4bdc1e0139b763f548a4</td>
-    <td>None</td>
-  </tr>
-  <tr>
-    <td>Graylog2.graylog2-server</td>
-    <td>e7eb9f2c98dd576658bf0160d2ef4720740897ab</td>
-    <td>Corrective</td>
-  </tr>
-  <tr>
-    <td>Graylog2.graylog2-server</td>
-    <td>eba7e984d0999606f90689ca3b89ee644b1e92a4</td>
-    <td>Corrective</td>
-  </tr>
-  <tr>
-    <td>Graylog2.graylog2-server</td>
-    <td>f47d4f07970a09a1aaf5b0e94eb5fe53c2e4b14f</td>
-    <td>Corrective</td>
-  </tr>
-  <tr>
-    <td>Graylog2.graylog2-server</td>
-    <td>f6a978eb151c88f6241aabf4c7bd93c76be70bac</td>
-    <td>Corrective</td>
-  </tr>
-  <tr>
-    <td>Graylog2.graylog2-server</td>
-    <td>3c103f5cf926b5d3b0e2b53eeefa7db4a75b80d0</td>
-    <td>Corrective</td>
-  </tr>
-  <tr>
-    <td>Graylog2.graylog2-server</td>
-    <td>3e97b0501c42c4adc47d32db7484295646632263</td>
-    <td>Corrective</td>
-  </tr>
-  <tr>
-    <td>Graylog2.graylog2-server</td>
-    <td>574a2e4f78aea6bc9f0e1673e005acb26697eb76</td>
-    <td>Corrective</td>
-  </tr>
-  <tr>
-    <td>Graylog2.graylog2-server</td>
-    <td>9bcf32ab62047ea4913d9cde9f9e73e7acbfcda6</td>
-    <td>Corrective</td>
-  </tr>
-  <tr>
-    <td>Graylog2.graylog2-server</td>
-    <td>3a43345ad0a599659d462cfc14dba9d8c0553bbf</td>
-    <td>Corrective</td>
-  </tr>
-  <tr>
-    <td>Graylog2.graylog2-server</td>
-    <td>96a7c11c16fe2a6467cfcf2ed2366dc6cc56924c</td>
-    <td>Corrective</td>
-  </tr>
-  <tr>
-    <td>Graylog2.graylog2-server</td>
-    <td>efdc1c8c89efe76a650fbaa9fd870126cb391feb</td>
-    <td>Corrective</td>
-  </tr>
-  <tr>
-    <td>Graylog2.graylog2-server</td>
-    <td>08605e65c92ff529290b534ee2de50117953362d</td>
-    <td>Preventative</td>
-  </tr>
-  <tr>
-    <td>Graylog2.graylog2-server</td>
-    <td>1dc7ebfc26b5ef1f88e84702582715eb631202db</td>
-    <td>Corrective</td>
-  </tr>
-  <tr>
-    <td>Graylog2.graylog2-server</td>
-    <td>578bd281f8cb12f46ca902cd2b87b0838a831a90</td>
-    <td>Corrective</td>
-  </tr>
-  <tr>
-    <td>Graylog2.graylog2-server</td>
-    <td>5b4979166050e553fd967e5094509de7975651ec</td>
-    <td>Corrective</td>
-  </tr>
-  <tr>
-    <td>Graylog2.graylog2-server</td>
-    <td>700b61dacfe5ed709d08f0fe196563dc55481398</td>
-    <td>Corrective</td>
-  </tr>
-  <tr>
-    <td>Graylog2.graylog2-server</td>
-    <td>7a90cfe13f0b030f6e091154c1d0091c685039f1</td>
-    <td>Corrective</td>
-  </tr>
-  <tr>
-    <td>Graylog2.graylog2-server</td>
-    <td>7efab8ecbdc082c324799aa7e25490a8e0e5520b</td>
-    <td>Corrective</td>
-  </tr>
-  <tr>
-    <td>Graylog2.graylog2-server</td>
-    <td>a161d8d1924d1fb49a4d229370d998be1493957c</td>
-    <td>Corrective</td>
-  </tr>
-  <tr>
-    <td>Graylog2.graylog2-server</td>
-    <td>e7eb9f2c98dd576658bf0160d2ef4720740897ab</td>
-    <td>Corrective</td>
-  </tr>
-  <tr>
-    <td>Graylog2.graylog2-server</td>
-    <td>f47d4f07970a09a1aaf5b0e94eb5fe53c2e4b14f</td>
-    <td>Corrective</td>
-  </tr>
-  <tr>
-    <td>Graylog2.graylog2-server</td>
-    <td>fe2b27f01d3c2a3eb0090bec3f7badbd02780bf7</td>
-    <td>Corrective</td>
-  </tr>
-  <tr>
-    <td>Graylog2.graylog2-server</td>
-    <td>3a4bffab632bcb1a51b945c448ba4323d0d91519</td>
-    <td>Corrective</td>
-  </tr>
-  <tr>
-    <td>Graylog2.graylog2-server</td>
-    <td>9748b0df80f44c89177700dd2b25ab2916c4964f</td>
-    <td>Corrective</td>
-  </tr>
-  <tr>
-    <td>Graylog2.graylog2-server</td>
-    <td>8cac34cb2fd489023a20702dabf24db38c64b3cf</td>
-    <td>Corrective</td>
-  </tr>
-  <tr>
-    <td>Graylog2.graylog2-server</td>
-    <td>01fee8245ea33cbfe79dfc8bc3a7d4b9e3047beb</td>
-    <td>Corrective</td>
-  </tr>
-  <tr>
-    <td>Graylog2.graylog2-server</td>
-    <td>2f911ed7f1f66cc287094914f4794cbd20b3e807</td>
-    <td>Corrective</td>
-  </tr>
-  <tr>
-    <td>Graylog2.graylog2-server</td>
-    <td>536a8fa49fc8ce69e42af6004dc328ddc2ded045</td>
-    <td>Corrective</td>
-  </tr>
-  <tr>
-    <td>Graylog2.graylog2-server</td>
-    <td>6573aea4805b3a7838e33e082c76589d1a274a92</td>
-    <td>Feature Addition</td>
-  </tr>
-  <tr>
-    <td>Graylog2.graylog2-server</td>
-    <td>902fd82cfb03cf097420689304a8791fd1e15798</td>
-    <td>Corrective</td>
-  </tr>
-  <tr>
-    <td>Graylog2.graylog2-server</td>
-    <td>a41f4fbfcbbcf4b7e075666e2897271b7c8fa34e</td>
-    <td>Corrective</td>
-  </tr>
-  <tr>
-    <td>Graylog2.graylog2-server</td>
-    <td>a8c6a40fd192cd5692c550a3311db004535cd0a6</td>
-    <td>Corrective</td>
-  </tr>
-  <tr>
-    <td>Graylog2.graylog2-server</td>
-    <td>acacb438d9c5ef8b6efa1d736d8e3db58385ce6c</td>
-    <td>Corrective</td>
-  </tr>
-  <tr>
-    <td>Graylog2.graylog2-server</td>
-    <td>b024a63a49006f869d7af610ae0ff5810cdb7c47</td>
-    <td>Corrective</td>
-  </tr>
-  <tr>
-    <td>Graylog2.graylog2-server</td>
-    <td>f56f7b22d4475a3b14077865f72ef95224916c18</td>
-    <td>Corrective</td>
-  </tr>
-  <tr>
-    <td>Graylog2.graylog2-server</td>
-    <td>fe2b27f01d3c2a3eb0090bec3f7badbd02780bf7</td>
-    <td>Corrective</td>
-  </tr>
-  <tr>
-    <td>Graylog2.graylog2-server</td>
-    <td>1607670a97fbdef587850a0fb848a9cee96a52fc</td>
-    <td>Corrective</td>
-  </tr>
-  <tr>
-    <td>Graylog2.graylog2-server</td>
-    <td>281abfdf91e6687a40fa98c20a35627372a0d6c7</td>
-    <td>Corrective</td>
-  </tr>
-  <tr>
-    <td>druid-io.druid</td>
-    <td>eafafce1aa058a495e214045ccbfe4d82adca240</td>
-    <td>Corrective</td>
-  </tr>
-  <tr>
-    <td>druid-io.druid</td>
-    <td>79958182209bbd23e048760e954e996346efa9c7</td>
-    <td>Corrective</td>
-  </tr>
-  <tr>
-    <td>druid-io.druid</td>
-    <td>eafafce1aa058a495e214045ccbfe4d82adca240</td>
-    <td>Corrective</td>
-  </tr>
-  <tr>
-    <td>druid-io.druid</td>
-    <td>3f71a4a3020bd65a54ae8753ff8f6c5540eec97c</td>
-    <td>Corrective</td>
-  </tr>
-</tbody>
-</table>
+Yields 98 distinct commits that have triggered a CI build. 
 
-So far, 56/61 (91,2%) commits are flagged as corrective (bug fix) by Commit Guru. 
+Within the Sstubs dataset, 34 projects are found in the Travis Torrent dataset (selected_sstubs table) with 830 distinct commits. 
 
-## Commits in `sstubs` that have triggered a CI build
+**98/830 (11.8%) commits have triggered a CI build** 
+
+--- The numbers in the section below are subject to change because some Commit Guru data is still missing --- 
+
+### Commits found in Commit Guru from `selected_sstubs`
+
+`SELECT * FROM selected_sstubs LEFT JOIN commit_guru WHERE fixCommitSha1 = commit_hash GROUP BY fixCommitSha1`
+
+**196/830 distinct commits are in Commit Guru** 
+
+`SELECT * FROM selected_sstubs LEFT JOIN commit_guru WHERE fixCommitSha1 = commit_hash AND Classification = 'Corrective' GROUP BY fixCommitSha1`
+
+**166/830 distinct commits were flagged as "corrective" by Commit Guru**
+
+### Commits found in Commit Guru from `selected_merged` (that also triggered a CI build)
+
+`SELECT * FROM selected_merged LEFT JOIN commit_guru WHERE commit_hash = fixCommitSha1 GROUP BY fixCommitSha1`
+
+**45/98 (45.9%) commits that triggered a CI build are in Commit Guru** 
+
+`SELECT * FROM selected_merged LEFT JOIN commit_guru WHERE commit_hash = fixCommitSha1 AND Classification = 'Corrective' GROUP BY fixCommitSha1`
+
+**41/98 (41.8%) commits that triggered a CI build are flagged as "corrective" by Commit Guru** 
+
+
+
+
