@@ -53,7 +53,7 @@ Projects that correspond to the following:
   </tr>
   <tr>
     <td>xetorthio.jedis</td>
-    <td></td>
+    <td>http://commit.guru/repo/jedis(master)</td>
   </tr>
 </tbody>
 </table>
