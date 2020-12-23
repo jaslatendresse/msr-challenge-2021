@@ -74,21 +74,50 @@ Within the Sstubs dataset, 34 projects are found in the Travis Torrent dataset (
 
 `SELECT * FROM selected_sstubs LEFT JOIN commit_guru WHERE fixCommitSha1 = commit_hash GROUP BY fixCommitSha1`
 
-**196/830 distinct commits are in Commit Guru** 
+**690/830 distinct commits are in Commit Guru - 83.1% coverage** 
 
 `SELECT * FROM selected_sstubs LEFT JOIN commit_guru WHERE fixCommitSha1 = commit_hash AND Classification = 'Corrective' GROUP BY fixCommitSha1`
 
-**166/830 distinct commits were flagged as "corrective" by Commit Guru**
+**545/830 distinct commits were flagged as "corrective" by Commit Guru - 65.7% of bug fix commits are considered corrective by Commit Guru**
 
 ## Commits found in Commit Guru from `selected_merged` (that also triggered a CI build)
 
 `SELECT * FROM selected_merged LEFT JOIN commit_guru WHERE commit_hash = fixCommitSha1 GROUP BY fixCommitSha1`
 
-**45/98 (45.9%) commits that triggered a CI build are in Commit Guru** 
+**98/98 (100%) commits that triggered a CI build are in Commit Guru** 
 
 `SELECT * FROM selected_merged LEFT JOIN commit_guru WHERE commit_hash = fixCommitSha1 AND Classification = 'Corrective' GROUP BY fixCommitSha1`
 
-**41/98 (41.8%) commits that triggered a CI build are flagged as "corrective" by Commit Guru** 
+**87/98 (88.8%) commits that triggered a CI build are flagged as "corrective" by Commit Guru** 
+
+## CI results before/after fix
+
+### Before
+
+To obtain the previous built commit: `git_prev_built_commit` column from Travis Torrent.
+Join `selected_merged` and `selected_travis` -- we want the previous built commit from selected_merged to be equal to the trigger commit of the selected_travis: 
+
+`SELECT selected_travis.git_trigger_commit, selected_travis.tr_status FROM selected_travis LEFT JOIN selected_merged WHERE selected_travis.git_trigger_commit = selected_merged.git_prev_built_commit GROUP BY selected_travis.git_trigger_commit`
+
+**Yields a total of 95 distinct commits** 
+
+Compare the build status: 
+
+`SELECT * FROM (SELECT selected_travis.git_trigger_commit, selected_travis.tr_status FROM selected_travis LEFT JOIN selected_merged WHERE selected_travis.git_trigger_commit = selected_merged.git_prev_built_commit GROUP BY selected_travis.git_trigger_commit) WHERE tr_status = 'passed'`
+
+**71/95 (74.7%) distinct commits that triggered a CI build passed before the "bug fix" is introduced**
+
+**24/95 (25.3%) distinct commits that triggered a CI build either "errored" or "failed" before the bug fix is introduced** 
+
+### After 
+
+`SELECT * FROM selected_merged WHERE tr_status = 'passed' GROUP BY fixCommitSha1`
+
+**78/98 (79.6%) distinct commits that triggered a CI build 'passed' after the fix is introduced**
+
+**20/98 (20.4%) distinct commits that triggered a CI build 'failed' after the fix is introduced** 
+
+
 
 
 
