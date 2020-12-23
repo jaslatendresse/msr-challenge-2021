@@ -33,11 +33,11 @@ Projects that correspond to the following:
   </tr>
   <tr>
     <td>apache.storm</td>
-    <td></td>
+    <td>http://commit.guru/repo/storm(master)-1</td>
   </tr>
   <tr>
     <td>checkstyle.checkstyle</td>
-    <td></td>
+    <td>http://commit.guru/repo/checkstyle(master)</td>
   </tr>
   <tr>
     <td>druid-io.druid</td>
@@ -45,11 +45,11 @@ Projects that correspond to the following:
   </tr>
   <tr>
     <td>facebook.presto</td>
-    <td></td>
+    <td>http://commit.guru/repo/presto(master)</td>
   </tr>
   <tr>
     <td>google.closure-compiler</td>
-    <td></td>
+    <td>http://commit.guru/repo/closure-compiler(master)</td>
   </tr>
   <tr>
     <td>xetorthio.jedis</td>
