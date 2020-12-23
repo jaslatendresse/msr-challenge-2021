@@ -50,3 +50,32 @@ What we are interested in next:
 - % of commits in MSR dataset (untouched) that have triggered CI builds 
 - % of commits that commit guru finds them as bug fixes. 
 
+# 2020-12-23
+
+## Brainstorming 
+
+Quantitive analysis
+
+- How many commits triggered the CI (must be a PR)? 
+- How many are part of the PR (in the list)? 
+- How long the bugs stay in the code before they're fixed? (if long time, then maybe not risky?) 
+
+Qualitative analysis
+
+- Why CI pipeline doesn't not catch these bugs? 
+- When bugs fixed, are tests added to the code? 
+- Is the bug covered by a test? 
+
+Include commits that are not part of the CI table. 
+
+## Questions
+
+- What % of bugs are caught by the CI? 
+- If not caught, why? 
+
+## Next Step 
+
+- Set up document to work on the paper
+- Set up the pipeline for the latex template (GitHub actions) 
+
+
