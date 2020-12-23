@@ -69,7 +69,12 @@ def main():
     selected_sstubs = 'docs/selected_sstubs_projects.json'
     sstubs_original = 'docs/sstubs.json'
     graylog2 = 'docs/commit-guru/graylog2.csv'
-    druid = 'docs/commit-guru/druid-io.csv'
+    druid = 'docs/commit-guru/druid.csv'
+    storm = 'docs/commit-guru/apache-storm.csv'
+    checkstyle = 'docs/commit-guru/checkstyle.csv'
+    closure = 'docs/commit-guru/closure-compiler.csv'
+    jedis = 'docs/commit-guru/jedis.csv'
+    presto = 'docs/commit-guru/presto.csv'
 
     # Commits from the original Sstubs dataset 
     create_table(sstubs_original, database, 'sstubs')
@@ -83,6 +88,11 @@ def main():
     # Project in CommitGuru
     create_commit_guru_table(graylog2, database)
     create_commit_guru_table(druid, database)
+    create_commit_guru_table(storm, database)
+    create_commit_guru_table(checkstyle, database)
+    create_commit_guru_table(closure, database)
+    create_commit_guru_table(jedis, database)
+    create_commit_guru_table(presto, database)
 
 if __name__ == '__main__':
     main()
