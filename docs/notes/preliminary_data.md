@@ -92,6 +92,8 @@ Within the Sstubs dataset, 34 projects are found in the Travis Torrent dataset (
 
 ## CI results before/after fix
 
+**This cannot be compared with the "after" results because even though this is the previous built commit, the bug might still be IN the code and was just not "caught" yet, we need to know when the bug was actually introduced, but this is just to see what we can do with the tables** 
+
 ### Before
 
 To obtain the previous built commit: `git_prev_built_commit` column from Travis Torrent.
