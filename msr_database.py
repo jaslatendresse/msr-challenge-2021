@@ -75,6 +75,7 @@ def main():
     closure = 'docs/commit-guru/closure-compiler.csv'
     jedis = 'docs/commit-guru/jedis.csv'
     presto = 'docs/commit-guru/presto.csv'
+    flink = 'docs/commit-guru/apache-flink.csv'
 
     # Commits from the original Sstubs dataset 
     create_table(sstubs_original, database, 'sstubs')
@@ -93,6 +94,7 @@ def main():
     create_commit_guru_table(closure, database)
     create_commit_guru_table(jedis, database)
     create_commit_guru_table(presto, database)
+    create_commit_guru_table(flink, database)
 
 if __name__ == '__main__':
     main()
