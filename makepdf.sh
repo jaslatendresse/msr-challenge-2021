@@ -9,5 +9,5 @@ docker run \
   -v $GITHUB_WORKSPACE/$document:/project \
   -w /project \
   --entrypoint "./makepdf.sh" \
-  pandoc-eisvogel-acm \
+  pandoc-eisvogel \
   $document
