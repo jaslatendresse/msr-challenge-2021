@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# docker build -t pandoc-eisvogel-acm ./docker-msr
+# docker build -t pandoc-eisvogel ./docker-msr
 
 document=msr-challenge-2020
 
