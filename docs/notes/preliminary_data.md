@@ -12,6 +12,37 @@
 
 **commit_guru** - Commits from repositories that are in selected_merged 
 
+## Commit Guru Overview
+
+- **commit_id**: a unique ID that companies the repository id and the commit hash.
+- **author_date**: the commit author date in the Unix Time format.
+- **buggy**: a boolean indicated if the commit has been identified as bug inducing (fix inducing) using the SZZ algorithm.
+- **repository_id**: a unique ID for the repository.
+- **commit_hash**: the git commit's SHA-1 hash.
+- **author_name**: the name of the commit author.
+- **author_email**: the email of the commit author.
+- **commit_message**: the first line of the commit message (max 70 characters).
+- **is_fix_commit**: a boolean indicates if the commit is a corrective commit.
+- **fixed_by**: commit hashes (separated by ;) for commits that fix changes induced by this commit.
+- **files_count**: number of files changed by the commit (including none-source code files).
+- **files**: paths of changed files (separated by ;).
+- **bug_potential**: the probability that the commit is bug inducing (predicted using a random forest model).
+- **ns**: is the number of modified subsystems.
+- **ns**: is the number of modified directories.
+- **nf**: is the number of modified files.
+- **entropy**: is the distribution of modified code across each file.
+- **la**: is lines of code added in the commit.
+- **ld**: is lines of code deleted in the commit.
+- **ha**: is hunks of code added in the commit.
+- **hd**: is hunks of code deleted in the commit.
+- **lt**: is lines of code in the modified files before the commit.
+- **ndev**: is the number of developers that changed the modified files in the past.
+- **age**: is the average time interval between the last and the current change of modified files.
+- **nuc**: is the number of unique last changes that touched the modified files.
+- **exp**: is the developer experience, measured by the number of submitted commits.
+- **rexp**: is the recent developer experience in the modified files.
+- **sexp**: is the developer experience on modified subsystems.
+
 ## Selected Projects (Sstubs, TravisTorrent, CommitGuru) 
 
 Projects that correspond to the following: 
@@ -55,6 +86,10 @@ Projects that correspond to the following:
     <td>xetorthio.jedis</td>
     <td>http://commit.guru/repo/jedis(master)</td>
   </tr>
+  <tr>
+    <td>apache.flink</td>
+    <td></td>
+  </tr>
 </tbody>
 </table>
 
@@ -74,21 +109,21 @@ Within the Sstubs dataset, 34 projects are found in the Travis Torrent dataset (
 
 `SELECT * FROM selected_sstubs LEFT JOIN commit_guru WHERE fixCommitSha1 = commit_hash GROUP BY fixCommitSha1`
 
-**690/830 distinct commits are in Commit Guru - 83.1% coverage** 
+**703/830 distinct commits are in Commit Guru - 84.7% coverage** 
 
-`SELECT * FROM selected_sstubs LEFT JOIN commit_guru WHERE fixCommitSha1 = commit_hash AND Classification = 'Corrective' GROUP BY fixCommitSha1`
+`SELECT * FROM selected_sstubs LEFT JOIN commit_guru WHERE fixCommitSha1 = commit_hash AND is_fix_commit = 1 GROUP BY fixCommitSha1`
 
-**545/830 distinct commits were flagged as "corrective" by Commit Guru - 65.7% of bug fix commits are considered corrective by Commit Guru**
+**278/830 distinct commits were flagged as "corrective" by Commit Guru - 33.5% of bug fix commits are considered corrective by Commit Guru**
 
 ## Commits found in Commit Guru from `selected_merged` (that also triggered a CI build)
 
 `SELECT * FROM selected_merged LEFT JOIN commit_guru WHERE commit_hash = fixCommitSha1 GROUP BY fixCommitSha1`
 
-**98/98 (100%) commits that triggered a CI build are in Commit Guru** 
+**88/98 (89.8%) commits that triggered a CI build are in Commit Guru - slight decrease (as opposed to 100%) because apache-flink project added to set and was missing previously** 
 
-`SELECT * FROM selected_merged LEFT JOIN commit_guru WHERE commit_hash = fixCommitSha1 AND Classification = 'Corrective' GROUP BY fixCommitSha1`
+`SELECT * FROM selected_merged LEFT JOIN commit_guru WHERE commit_hash = fixCommitSha1 AND is_fix_commit = 1 GROUP BY fixCommitSha1`
 
-**87/98 (88.8%) commits that triggered a CI build are flagged as "corrective" by Commit Guru** 
+**33/98 (33.7%) commits that triggered a CI build are flagged as "corrective" by Commit Guru** 
 
 ## CI results before/after fix
 
@@ -115,9 +150,9 @@ Compare the build status:
 
 `SELECT * FROM selected_merged WHERE tr_status = 'passed' GROUP BY fixCommitSha1`
 
-**78/98 (79.6%) distinct commits that triggered a CI build 'passed' after the fix is introduced**
+**79/98 (79.6%) distinct commits that triggered a CI build 'passed' after the fix is introduced**
 
-**20/98 (20.4%) distinct commits that triggered a CI build 'failed' after the fix is introduced** 
+**19/98 (19.4%) distinct commits that triggered a CI build 'failed' after the fix is introduced** 
 
 
 
