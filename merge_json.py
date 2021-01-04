@@ -28,7 +28,7 @@ def select_sstubs():
     
 
 def main():
-    #merge_json()
+    merge_json()
     select_sstubs()
 
 if __name__ == '__main__':
