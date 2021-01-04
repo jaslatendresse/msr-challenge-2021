@@ -28,7 +28,7 @@
 - **files**: paths of changed files (separated by ;).
 - **bug_potential**: the probability that the commit is bug inducing (predicted using a random forest model).
 - **ns**: is the number of modified subsystems.
-- **ns**: is the number of modified directories.
+- **nd**: is the number of modified directories.
 - **nf**: is the number of modified files.
 - **entropy**: is the distribution of modified code across each file.
 - **la**: is lines of code added in the commit.
