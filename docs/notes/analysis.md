@@ -55,5 +55,6 @@ WHERE gh_is_pr = 'False'
 
 **92 distincts commits that have triggered a CI build are NOT pull requests (93.88%)**
 
-We want to see if this number (92) corresponds to the number of commits that are part of the "part of the PR" list. 
+We want to see if this number (92) corresponds to the number of commits that are part of the "part of the build, but not a PR" list. For this: write a script that will query the `selected_travis` table and obtain the `gh_commits_in_push` to get the list of all commits that are part of a build. Then, for each build, we will check if the commits in `selected_sstubs` that are not PR are part of the aforementioned list. This will give us an idea of the proportion of commits that are caught by the CI. 
+
 
