@@ -31,8 +31,9 @@ def create_list(database, table_name, column_name):
     if conn is not None:
             c.execute(query)
             results = c.fetchall()
+            final_result = [i[0] for i in results]
             with open('docs/gh_commits_in_push.txt', 'w') as f:
-                for row in results:
+                for row in final_result:
                     f.write("%s\n" % str(row))
             conn.commit()
             conn.close()
