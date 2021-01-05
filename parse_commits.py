@@ -34,12 +34,15 @@ def create_list(database, table_name, column_name):
             final_result = [i[0] for i in results]
             with open('docs/gh_commits_in_push.txt', 'w') as f:
                 for row in final_result:
-                    f.write("%s\n" % str(row))
+                    if row.strip('\n') != 'None':
+                        f.write("%s\n" % str(row))
             conn.commit()
             conn.close()
 
     else:
         print("Error! cannot create the database connection.")
+
+#def parse_list(text_file):
 
 
 def main():
