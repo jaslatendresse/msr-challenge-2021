@@ -11,7 +11,7 @@
 - When bugs are fixed, are tests added to the code? 
 - Is the bug covered by a test? 
 
-Include commits that are not aprt of the CI table. 
+Include commits that are not part of the CI table. 
 
 ## Research Questions
 
@@ -29,7 +29,7 @@ How many commits triggered the CI? This can be split into the following question
 
 For this, I will query the join table of `selected_sstubs` and `selected_travis` because we want CI data from the projects we selected. I will NOT use `selected_merged` because this table only contains commits that triggered a build. 
 
-**For question 1: How many commits are pull requests?**
+### For question 1: How many commits are pull requests?
 
 How many commits are in the join of `selected_sstubs` and `selected_travis` ? (In other words, how many commits in `selected_sstubs` triggered a build?)
 
@@ -57,4 +57,17 @@ WHERE gh_is_pr = 'False'
 
 We want to see if this number (92) corresponds to the number of commits that are part of the "part of the build, but not a PR" list. For this: write a script that will query the `selected_travis` table and obtain the `gh_commits_in_push` to get the list of all commits that are part of a build. Then, for each build, we will check if the commits in `selected_sstubs` that are not PR are part of the aforementioned list. This will give us an idea of the proportion of commits that are caught by the CI. 
 
+After running the script to extract the `gh_commits_in_push`, I used the same query as above to get the commits that are not a PR but that have triggered a build and compared the lists. 
+
+**77 distinct NON-PR commits that have triggered a CI build are part of the list of commits in the push that have triggered the build (83.7%)** 
+
+(??) This leaves us with 15 commits that are not PR nor appear in the list of commits in the push that triggered a build but that triggered a build.  
+
+### For question 2: How long do bugs stay in the code? 
+
+In Commit Guru, there is a column called **'fixed_by': commit hashes (separated by ;) for commits that fix changes induced by this commit.**
+
+If a commit from `selected_sstubs` is found in the list of  `fixed_by` commits, then we can trace back to the commit that introduced the bug and get the time stamp. 
+
+In short, we want the row for which a `selected_sstubs` fix commit is found in the 'fixed_by' column. 
 
