@@ -67,6 +67,8 @@ After running the script to extract the `gh_commits_in_push`, I used the same qu
 
 **How many commits do not trigger the CI?**
 
+i.e. commits that just go straight to master: commits that are not PRs and commits that are not in the gh_commits_in_push list.
+
 To answer this question, I need commits from the `selected_sstubs` set since it contains commits from projects that are also in the Travis Torrent set, but it doesn't mean all commits are in the builds. 
 
 
