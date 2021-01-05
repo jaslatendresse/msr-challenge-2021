@@ -39,7 +39,7 @@ def create_commit_list(database, query, text_file):
     else:
         print("Error! cannot create the database connection.")
 
-def create_list(database, query, text_file):
+def create_push_commits_list(database, query, text_file):
     conn = create_connection(database)
     c = conn.cursor()
 
@@ -67,18 +67,39 @@ def parse_commits(text_file1, text_file2):
                 for line in lines:
                     if str(commit) in line: 
                         commits_list.append(commit)
-    #print(count)
     final_list = list(dict.fromkeys(commits_list))
-    print(len(final_list))
+    print(str(len(final_list)) + ' distinct NON-PR commits that have triggered a CI build (that are in the gh_commits_in_push column)')
+
+def create_fixed_by_list(database, query, text_file):
+    conn = create_connection(database)
+    c = conn.cursor()
+
+    if conn is not None:
+            c.execute(query)
+            results = c.fetchall()
+            final_result = [i[0] for i in results]
+            with open(text_file, 'w') as f:
+                for row in final_result:
+                    if row is not None:
+                        f.write("%s\n" % str(row).split(';'))
+            conn.commit()
+            conn.close()
+
+    else:
+        print("Error! cannot create the database connection.")
+
 
 def main():
     database = r"../sqlite/db/msr_db.db"
     
     gh_commits_query = 'SELECT gh_commits_in_push FROM selected_travis GROUP BY gh_commits_in_push'
-    create_list(database, gh_commits_query, 'docs/gh_commits_in_push.txt')
+    create_push_commits_list(database, gh_commits_query, 'docs/gh_commits_in_push.txt')
 
     not_pr_query = 'SELECT fixCommitSha1 FROM (SELECT * FROM selected_sstubs LEFT JOIN selected_travis WHERE fixCommitSha1 = git_trigger_commit GROUP BY fixCommitSha1) WHERE gh_is_pr = "False"'
     create_commit_list(database, not_pr_query, 'docs/not_a_pr_commit.txt')
+
+    commit_guru_fixed_by_query = 'SELECT fixed_by FROM commit_guru'
+    create_fixed_by_list(database, commit_guru_fixed_by_query, 'docs/commit_guru_fixed_by.txt')
 
     parse_commits('docs/not_a_pr_commit.txt', 'docs/gh_commits_in_push.txt')
     
