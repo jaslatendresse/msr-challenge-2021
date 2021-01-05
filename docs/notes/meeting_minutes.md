@@ -78,4 +78,14 @@ Include commits that are not part of the CI table.
 - Set up document to work on the paper
 - Set up the pipeline for the latex template (GitHub actions) 
 
+# 2021-01-05
+
+Validate the 15 commits that are not PR nor appear in the list gh_commits_in_push (just to make sure).
+
+Panda explode - replicate row for each value of the list you have in one column (For the fixed_by column in the commit guru set)
+
+Next step: find out how long do bugs stay in the code (from selected_sstubs - the 830 distinct commits) with the fixed_by column from commit guru. 
+
+
+
 

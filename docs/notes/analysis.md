@@ -21,7 +21,9 @@ Include commits that are not part of the CI table.
 
 ## Quantitative Data 
 
-How many commits triggered the CI? This can be split into the following questions: 
+### How many commits triggered the CI? 
+
+This can be split into the following questions: 
 
 1. How many commits are pull requests? 
 2. How many commits are part of pull requests? 
@@ -29,7 +31,7 @@ How many commits triggered the CI? This can be split into the following question
 
 For this, I will query the join table of `selected_sstubs` and `selected_travis` because we want CI data from the projects we selected. I will NOT use `selected_merged` because this table only contains commits that triggered a build. 
 
-### For question 1: How many commits are pull requests?
+**For question 1: How many commits are pull requests?**
 
 How many commits are in the join of `selected_sstubs` and `selected_travis` ? (In other words, how many commits in `selected_sstubs` triggered a build?)
 
@@ -63,7 +65,14 @@ After running the script to extract the `gh_commits_in_push`, I used the same qu
 
 (??) This leaves us with 15 commits that are not PR nor appear in the list of commits in the push that triggered a build but that triggered a build.  
 
-### For question 2: How long do bugs stay in the code? 
+**How many commits do not trigger the CI?**
+
+i.e. commits that just go straight to master: commits that are not PRs and commits that are not in the gh_commits_in_push list.
+
+To answer this question, I need commits from the `selected_sstubs` set since it contains commits from projects that are also in the Travis Torrent set, but it doesn't mean all commits are in the builds. 
+
+
+## How long do bugs stay in the code? 
 
 In Commit Guru, there is a column called **'fixed_by': commit hashes (separated by ;) for commits that fix changes induced by this commit.**
 
