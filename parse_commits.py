@@ -1,5 +1,6 @@
 import sqlite3
 from sqlite3 import Error
+import pandas as pd
 
 # Query selected_travis to select 'gh_commits_in_push' 
 # Parse the results: can either have 'None' or a list of commits separated by '#'
@@ -70,25 +71,6 @@ def parse_commits(text_file1, text_file2):
     final_list = list(dict.fromkeys(commits_list))
     print(len(final_list))
 
-def create_fixed_by_list(database, query, text_file):
-    conn = create_connection(database)
-    c = conn.cursor()
-
-    if conn is not None:
-            c.execute(query)
-            results = c.fetchall()
-            final_result = [i[0] for i in results]
-            with open(text_file, 'w') as f:
-                for row in final_result:
-                    if row is not None:
-                        f.write("%s\n" % str(row).split(';'))
-            conn.commit()
-            conn.close()
-
-    else:
-        print("Error! cannot create the database connection.")
-
-
 def main():
     database = r"../sqlite/db/msr_db.db"
     
@@ -98,14 +80,12 @@ def main():
     not_pr_query = 'SELECT fixCommitSha1 FROM (SELECT * FROM selected_sstubs LEFT JOIN selected_travis WHERE fixCommitSha1 = git_trigger_commit GROUP BY fixCommitSha1) WHERE gh_is_pr = "False"'
     create_commit_list(database, not_pr_query, 'docs/not_a_pr_commit.txt')
 
-    commit_guru_fixed_by_query = 'SELECT fixed_by FROM commit_guru'
-    create_fixed_by_list(database, commit_guru_fixed_by_query, 'docs/commit_guru_fixed_by.txt')
-
     selected_sstubs_commits_query = 'SELECT fixCommitSha1 FROM selected_sstubs GROUP BY fixCommitSha1'
     create_commit_list(database, selected_sstubs_commits_query, 'docs/selected_sstubs_commits.txt')
 
     print('distinct NON-PR commits that are part of commits in a PR that has triggered a build: ')
     parse_commits('docs/not_a_pr_commit.txt', 'docs/gh_commits_in_push.txt')
     
+
 if __name__ == '__main__':
     main()
