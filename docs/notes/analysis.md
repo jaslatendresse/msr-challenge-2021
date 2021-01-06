@@ -107,3 +107,25 @@ FROM split
 WHERE fixed_by!='';`
 
 Now, to know how long the bugs stayed in the code before they were fixed, I need verify if the selected_sstubs commits are in the commit_guru_formatted table to obtain the timestamp. If yes, then I will check if a selected_sstubs commit is in the fixed_by column. From this, I will get the author_date of the commit that is fixed and compare it with the author date of the fix commit. 
+
+First, need to create a selected_sstubs table that contains commits that are in commit guru so we can access the author date: 
+
+`CREATE TABLE selected_sstubs_with_date AS
+SELECT bugType, fixCommitSHA1, fixCommitParentSHA1, projectName, author_date, is_fix_commit FROM selected_sstubs 
+LEFT JOIN commit_guru_formatted WHERE fixCommitSHA1 = commit_hash`
+
+This results in 362 rows. 
+
+Second, we query to check if a commit from this table is found in the fixed_by column of the commit_guru_formatted table:
+
+`SELECT selected_sstubs_with_date.author_date as fix_date, commit_guru_formatted.author_date as bug_date FROM selected_sstubs_with_date LEFT JOIN commit_guru_formatted WHERE fixCommitSHA1 = fixed_by `
+
+We obtain 370 rows. 
+
+Now we can compare the unix time stamps and make an average. 
+
+Calculations are found here: 
+https://docs.google.com/spreadsheets/d/1OhTgN95XyE80GK3tPUYUD213-iOlA_tCFZETNeh7TDo/edit?usp=sharing 
+
+Still need to determine if we should remove duplicate rows, if so, modify GROUP BY in query? 
+
