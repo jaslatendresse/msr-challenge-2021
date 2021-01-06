@@ -106,3 +106,4 @@ SELECT commit_id, commit_hash, buggy, repository_id, author_date, is_fix_commit,
 FROM split
 WHERE fixed_by!='';`
 
+Now, to know how long the bugs stayed in the code before they were fixed, I need verify if the selected_sstubs commits are in the commit_guru_formatted table to obtain the timestamp. If yes, then I will check if a selected_sstubs commit is in the fixed_by column. From this, I will get the author_date of the commit that is fixed and compare it with the author date of the fix commit. 
