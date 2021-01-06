@@ -80,3 +80,27 @@ If a commit from `selected_sstubs` is found in the list of  `fixed_by` commits, 
 
 In short, we want the row for which a `selected_sstubs` fix commit is found in the 'fixed_by' column. 
 
+**Problem**: The column fixed_by is a string of commits separated by a semicolon. I need to extra the full row with multiple columns to get all the data I need. My script only works for extracting one column and returns the value of the column as a list of strings. 
+
+**Solution**:
+
+**Replace ';' with ',' in the fixed_by column from commit_guru table**: 
+
+`UPDATE commit_guru
+SET fixed_by = REPLACE(fixed_by, ';', ',')`
+
+**Split the fixed_by column into multiple rows (for each comma separated string) and create new table from the output**: 
+
+`CREATE TABLE commit_guru_formatted AS
+WITH RECURSIVE split(commit_id, commit_hash, buggy, repository_id, author_date, is_fix_commit, fixed_by, str) AS (
+SELECT commit_id, commit_hash, buggy, repository_id, author_date, is_fix_commit, '', fixed_by||',' FROM commit_guru
+UNION ALL SELECT
+commit_id, commit_hash, buggy, repository_id, author_date, is_fix_commit,
+substr(str, 0, instr(str,',')),
+substr(str, instr(str,',')+1)
+FROM split WHERE str!=''
+)
+SELECT commit_id, commit_hash, buggy, repository_id, author_date, is_fix_commit, fixed_by
+FROM split
+WHERE fixed_by!='';`
+
