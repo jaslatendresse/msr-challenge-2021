@@ -82,6 +82,8 @@ In short, we want the row for which a `selected_sstubs` fix commit is found in t
 
 **Problem**: The column fixed_by is a string of commits separated by a semicolon. I need to extra the full row with multiple columns to get all the data I need. My script only works for extracting one column and returns the value of the column as a list of strings. 
 
+Pandas (with Python) explode function could not be used in this case because the fixed_by column values were not lists, but strings separated with a semicolon. 
+
 **Solution**:
 
 **Replace ';' with ',' in the fixed_by column from commit_guru table**: 
