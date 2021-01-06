@@ -124,7 +124,7 @@ We obtain 370 rows.
 
 Now we can compare the unix time stamps and make an average. 
 
-Calculations are found here: 
+Calculations and data can be found here: 
 https://docs.google.com/spreadsheets/d/1mDu3_304ECtOc7F6QlLUJYC-jE4Z-PnEeejnM7c3v6w/edit?usp=sharing
 
 Still need to determine if we should remove duplicate rows, if so, modify GROUP BY in query? 
