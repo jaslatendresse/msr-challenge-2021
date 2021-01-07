@@ -86,6 +86,22 @@ Panda explode - replicate row for each value of the list you have in one column 
 
 Next step: find out how long do bugs stay in the code (from selected_sstubs - the 830 distinct commits) with the fixed_by column from commit guru. 
 
+# 2021-01-07
 
+## Next step + brainstorming
+- Start gathering the data, write it in the paper (answering the questions) to define the scope. 
+- More interesting if a bug was caught by the CI. 
+  - We have a timeline of the bug fix, we can compare the CI pipeline of the timeline before and after the fix. 
+  - Use travis torrent data set, is there a test passing or failing after the fix? 
+  - Was it caught? Did devs add tests to catch it after? 
 
+Methodology - do we trust the results? 
+Conclusions - are our findings relevant? 
 
+Next:
+
+- Find bugs not caught by the CI. 
+- Start sketching the methology, make the tables (put what you find interesting, results answering the questions, etc)
+- Related works (from this summer) to be included in the introduction. 
+- Schema (maybe) overview of our approach 
+- Consider doing some visualization (plots, graphs) 
