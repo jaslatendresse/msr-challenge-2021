@@ -42,35 +42,30 @@ How many commits are in the join of `selected_sstubs` and `selected_travis` ? (I
 How many commits are PRs? 
 
 ```
-SELECT * FROM
-(SELECT * FROM selected_sstubs LEFT JOIN selected_travis WHERE fixCommitSha1 = git_trigger_commit GROUP BY fixCommitSha1)
-WHERE gh_is_pr = 'True'
+SELECT * FROM selected_sstubs LEFT JOIN selected_travis WHERE gh_is_pr = 'True' AND fixCommitSHA1 = git_trigger_commit GROUP BY fixCommitSha1
 ```
 
-**6 distinct commits that have triggered a CI build are pull requests (6.12%)**
+**12 distinct commits that have triggered a CI build are pull requests (12.2%)**
 
 ```
-SELECT * FROM
-(SELECT * FROM selected_sstubs LEFT JOIN selected_travis WHERE fixCommitSha1 = git_trigger_commit GROUP BY fixCommitSha1)
-WHERE gh_is_pr = 'False'
+SELECT * FROM selected_sstubs LEFT JOIN selected_travis WHERE gh_is_pr = 'False' AND fixCommitSHA1 = git_trigger_commit GROUP BY fixCommitSha1
 ```
 
-**92 distincts commits that have triggered a CI build are NOT pull requests (93.88%)**
+**94 distincts commits that have triggered a CI build are NOT pull requests (95.9%)**
 
-We want to see if this number (92) corresponds to the number of commits that are part of the "part of the build, but not a PR" list. For this: write a script that will query the `selected_travis` table and obtain the `gh_commits_in_push` to get the list of all commits that are part of a build. Then, for each build, we will check if the commits in `selected_sstubs` that are not PR are part of the aforementioned list. This will give us an idea of the proportion of commits that are caught by the CI. 
+We want to see if this number (94) corresponds to the number of commits that are part of the "part of the build, but not a PR" list. For this: write a script that will query the `selected_travis` table and obtain the `gh_commits_in_push` to get the list of all commits that are part of a build. Then, for each build, we will check if the commits in `selected_sstubs` that are not PR are part of the aforementioned list. This will give us an idea of the proportion of commits that are caught by the CI. 
 
 After running the script to extract the `gh_commits_in_push`, I used the same query as above to get the commits that are not a PR but that have triggered a build and compared the lists. 
 
-**77 distinct NON-PR commits that have triggered a CI build are part of the list of commits in the push that have triggered the build (83.7%)** 
+**83 distinct NON-PR commits that have triggered a CI build are part of the list of commits in the push that have triggered the build (88.3%)** 
 
-(??) This leaves us with 15 commits that are not PR nor appear in the list of commits in the push that triggered a build but that triggered a build.  
+(??) This leaves us with 11 commits that are not PR nor appear in the list of commits in the push that triggered a build but that triggered a build.  
 
 **How many commits do not trigger the CI?**
 
 i.e. commits that just go straight to master: commits that are not PRs and commits that are not in the gh_commits_in_push list.
 
 To answer this question, I need commits from the `selected_sstubs` set since it contains commits from projects that are also in the Travis Torrent set, but it doesn't mean all commits are in the builds. 
-
 
 ## How long do bugs stay in the code? 
 
