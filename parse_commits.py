@@ -77,7 +77,7 @@ def main():
     gh_commits_query = 'SELECT gh_commits_in_push FROM selected_travis GROUP BY gh_commits_in_push'
     create_push_commits_list(database, gh_commits_query, 'docs/gh_commits_in_push.txt')
 
-    not_pr_query = 'SELECT fixCommitSha1 FROM (SELECT * FROM selected_sstubs LEFT JOIN selected_travis WHERE fixCommitSha1 = git_trigger_commit GROUP BY fixCommitSha1) WHERE gh_is_pr = "False"'
+    not_pr_query = 'SELECT fixCommitSha1 FROM selected_sstubs LEFT JOIN selected_travis WHERE gh_is_pr = "False" AND fixCommitSHA1 = git_trigger_commit GROUP BY fixCommitSha1'
     create_commit_list(database, not_pr_query, 'docs/not_a_pr_commit.txt')
 
     selected_sstubs_commits_query = 'SELECT fixCommitSha1 FROM selected_sstubs GROUP BY fixCommitSha1'
