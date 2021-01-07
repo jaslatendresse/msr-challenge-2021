@@ -105,3 +105,4 @@ Next:
 - Related works (from this summer) to be included in the introduction. 
 - Schema (maybe) overview of our approach 
 - Consider doing some visualization (plots, graphs) 
+- Classify findings by bugType
