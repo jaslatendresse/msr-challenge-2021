@@ -4,7 +4,7 @@
 
 **sstubs** - Original dataset
 
-**selected_sstubs** - Sstubs commits from projects that were found in TravisTorrent 
+**selected_sstubs** - Sstubs commits from projects that were selected based on the criterias (8 projects)
 
 **selected_travis** - Travis builds from the selected projects
 
@@ -93,17 +93,25 @@ Projects that correspond to the following:
 </tbody>
 </table>
 
-## Commits in `selected_sstubs` that have triggered a CI build
+## Unique (fixCommitSHA1, bugType) pairs in `selected_sstubs`
+
+`SELECT * FROM selected_sstubs GROUP BY fixCommitSHA1, bugTYpe`
+
+**1035 unique pairs**
+
+## Distinct commits in `selected_sstubs`
+
+`SELECT DISTINCT fixCommitSHA1 FROM selected_sstubs`
+
+ **830 distinct commits from the 8 selected projects** 
+
+## Unique (distinct) commits in `selected_sstubs` that have triggered a CI build
 
 `SELECT * FROM selected_sstubs LEFT JOIN selected_travis WHERE fixCommitSha1 = git_trigger_commit GROUP BY fixCommitSha1`
 
 Yields 98 distinct commits that have triggered a CI build. 
 
-Within the Sstubs dataset, 34 projects are found in the Travis Torrent dataset (selected_sstubs table) with 830 distinct commits. 
-
-**98/830 (11.8%) commits have triggered a CI build** 
-
---- The numbers in the section below are subject to change because some Commit Guru data is still missing --- 
+**98/830 (11.8%) commits have triggered a CI build**  
 
 ## Commits found in Commit Guru from `selected_sstubs`
 
@@ -123,7 +131,7 @@ Within the Sstubs dataset, 34 projects are found in the Travis Torrent dataset (
 
 `SELECT * FROM selected_merged LEFT JOIN commit_guru WHERE commit_hash = fixCommitSha1 AND is_fix_commit = 1 GROUP BY fixCommitSha1`
 
-**33/98 (33.7%) commits that triggered a CI build are flagged as "corrective" by Commit Guru** 
+**33/98 (33.7%) distinct commits that triggered a CI build are flagged as "corrective" by Commit Guru** 
 
 ## CI results before/after fix
 
