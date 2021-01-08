@@ -126,43 +126,48 @@ Still need to determine if we should remove duplicate rows, if so, modify GROUP 
 
 ## Bugs not caught by the CI:
 
+Before anything, I formatted the travis torrent table by exploding the gh_commits_in_push column as I did above for the commit guru table. 
+
+`UPDATE selected_travis
+SET fixed_by = REPLACE(fixed_by, '#', ',')`
+
+ `CREATE TABLE selected_travis_formatted AS WITH RECURSIVE split(tr_build_id, tr_status, git_trigger_commit, gh_project_name, gh_is_pr, gh_commits_in_push, str) AS ( SELECT tr_build_id, tr_status, git_trigger_commit, gh_project_name, gh_is_pr, '', gh_commits_in_push||',' FROM selected_travis UNION ALL SELECT tr_build_id, tr_status, git_trigger_commit, gh_project_name, gh_is_pr, substr(str, 0, instr(str,',')), substr(str, instr(str,',')+1) FROM split WHERE str!='' ) SELECT tr_build_id, tr_status, git_trigger_commit, gh_project_name, gh_is_pr, gh_commits_in_push FROM split WHERE gh_commits_in_push!='';`
+
 First, we need to trace back to the commit when the bug was introduced. For This, we join the commit_guru table and the selected_sstubs table and select the commit_hash of commit guru for which a selected_sstubs fix commit appears in the fixed_by column. Since we want a unique pair of fix-bugtype, we group by this pair: 
 
 `CREATE TABLE bug_with_fix AS SELECT commit_guru_formatted.commit_hash as bug, selected_sstubs.fixCommitSHA1 as bug_fix, selected_sstubs.bugType FROM selected_sstubs LEFT JOIN commit_guru_formatted WHERE fixCommitSHA1 = fixed_by GROUP BY fixCommitSHA1, bugTYpe`
 
-**This results in 273 distinct (fix_hash, bugType) pairs.**
+**This results in 273 distinct (bug_hash, bugType) pairs.**
 
 Then, we want to take those bugs and search for them in the travis torrent set: 
 
+`SELECT bug, bug_fix, bugType FROM bug_with_fix LEFT JOIN selected_travis_formatted WHERE bug = gh_commits_in_push GROUP BY bug, bugType`
+
+**17/273 (bug_hash, bugType) are part of a build without being the trigger of the build**
+
 `SELECT * FROM bug_with_fix LEFT JOIN selected_travis WHERE bug = git_trigger_commit GROUP BY bug, bugType`
 
-**30/276 (bug_hash, bugType) triggered a build a CI build**
+**8/273 pairs triggered a build**
 
-**0 are PRs**
+`SELECT * FROM bug_with_fix LEFT JOIN selected_travis_formatted WHERE bug = git_trigger_commit OR bug = gh_commits_in_push GROUP BY bug, bugType`
 
-`SELECT * FROM bug_with_fix LEFT JOIN selected_travis WHERE bug = git_trigger_commit AND tr_status = 'failed' GROUP BY bug_fix, bugType`
+**44/273 are caught by the CI (either trigger a build or are part of a build**
 
-**5/30 have a failed build status**
+bugType in the 44 bugs that were caught by the CI: 
 
-`SELECT * FROM bug_with_fix LEFT JOIN selected_travis WHERE bug = git_trigger_commit AND tr_status = 'errored' GROUP BY bug_fix, bugType`
-
-**7/30 have an errored build status**
-
-`SELECT * FROM bug_with_fix LEFT JOIN selected_travis WHERE bug = git_trigger_commit AND tr_status = 'passed' GROUP BY bug_fix, bugType`
-
-**20/30 have a passed build status**
-
-bugType in the 30 bugs that triggered a CI build: 
-
-- 6 CHANGE_IDENTIFIER
-- 5 CHANGE_MODIFIER
-- 1 CHANGE_NUMERAL
+- 1 CHANGE_CALLER_IN_FUNCTION_CALL
+- 17 CHANGE_IDENTIFIER
+- 6 CHANGE_MODIFIER
+- 2 CHANGE_NUMERAL
 - 1 CHANGE OPERAND
 - 1 CHANGE_UNARY_OPERATOR
 - 1 DELETE_THROWS_EXCEPTION
-- 2 DIFFERENT_METHOD_SAME_ARGS
+- 5 DIFFERENT_METHOD_SAME_ARGS
 - 1 MORE_SPECIFIC_IF
-- 2 OVERLOAD_METHOD_MORE_ARGS
+- 1 LESS_SPECIFIC_IF
+- 1 OVERLOAD_METHOD_DELETED_ARGS
+- 6 OVERLOAD_METHOD_MORE_ARGS
+- 1 SWAP_BOOLEAN_LITERAL
 
 Now, how long did those bugs stay in the code for? 
 
