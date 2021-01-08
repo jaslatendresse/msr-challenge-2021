@@ -124,3 +124,45 @@ https://docs.google.com/spreadsheets/d/1mDu3_304ECtOc7F6QlLUJYC-jE4Z-PnEeejnM7c3
 
 Still need to determine if we should remove duplicate rows, if so, modify GROUP BY in query? 
 
+## Bugs not caught by the CI:
+
+First, we need to trace back to the commit when the bug was introduced. For This, we join the commit_guru table and the selected_sstubs table and select the commit_hash of commit guru for which a selected_sstubs fix commit appears in the fixed_by column. Since we want a unique pair of fix-bugtype, we group by this pair: 
+
+`CREATE TABLE bug_with_fix AS SELECT commit_guru_formatted.commit_hash as bug, selected_sstubs.fixCommitSHA1 as bug_fix, selected_sstubs.bugType FROM selected_sstubs LEFT JOIN commit_guru_formatted WHERE fixCommitSHA1 = fixed_by GROUP BY fixCommitSHA1, bugTYpe`
+
+**This results in 273 distinct (fix_hash, bugType) pairs.**
+
+Then, we want to take those bugs and search for them in the travis torrent set: 
+
+`SELECT * FROM bug_with_fix LEFT JOIN selected_travis WHERE bug = git_trigger_commit GROUP BY bug, bugType`
+
+**30/276 (bug_hash, bugType) triggered a build a CI build**
+
+**0 are PRs**
+
+`SELECT * FROM bug_with_fix LEFT JOIN selected_travis WHERE bug = git_trigger_commit AND tr_status = 'failed' GROUP BY bug_fix, bugType`
+
+**5/30 have a failed build status**
+
+`SELECT * FROM bug_with_fix LEFT JOIN selected_travis WHERE bug = git_trigger_commit AND tr_status = 'errored' GROUP BY bug_fix, bugType`
+
+**7/30 have an errored build status**
+
+`SELECT * FROM bug_with_fix LEFT JOIN selected_travis WHERE bug = git_trigger_commit AND tr_status = 'passed' GROUP BY bug_fix, bugType`
+
+**20/30 have a passed build status**
+
+bugType in the 30 bugs that triggered a CI build: 
+
+- 6 CHANGE_IDENTIFIER
+- 5 CHANGE_MODIFIER
+- 1 CHANGE_NUMERAL
+- 1 CHANGE OPERAND
+- 1 CHANGE_UNARY_OPERATOR
+- 1 DELETE_THROWS_EXCEPTION
+- 2 DIFFERENT_METHOD_SAME_ARGS
+- 1 MORE_SPECIFIC_IF
+- 2 OVERLOAD_METHOD_MORE_ARGS
+
+Now, how long did those bugs stay in the code for? 
+
