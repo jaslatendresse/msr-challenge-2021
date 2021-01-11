@@ -16,6 +16,10 @@ https://www.mybib.com/j/SourObeseHorse
 
 https://www.tablesgenerator.com/latex_tables
 
+## Case Study Design Figure
+
+https://drive.google.com/file/d/1WsLM-pp4eg8jRD07KNJ6D_iS3ez2QMLr/view?usp=sharing
+
 # Data 
 
 https://docs.google.com/spreadsheets/d/1mDu3_304ECtOc7F6QlLUJYC-jE4Z-PnEeejnM7c3v6w/edit?usp=sharing
