@@ -106,3 +106,33 @@ Next:
 - Schema (maybe) overview of our approach 
 - Consider doing some visualization (plots, graphs) 
 - Classify findings by bugType
+
+# 2021-01-12
+
+## TODO
+
+- Send 10 additional projects to Diego for commit guru. 
+- Validate fail 5 builds and the error builds. 
+- Remove pie chart and put table instead for proportion of bugs caught by CI. 
+-Be more specific about "caught by CI". 
+- With the lifespan, shows that CI did not catch it at all. 
+- Add number of instances in lifespan table. 
+- Abstract: rephrase "program repair" --> software maintenance or bug fixing. 
+- Sync overleaf with github (menu, sync, github) --> put all the documents in the folder msr-paper and sync it with overleaf. 
+- Add datasets from database to repo (in csv file) 
+
+## Brainstorming
+
+- If there are a bug that CI doesn't catch, are they tested? Are they severe?
+- How many of those bugs were prevented from being pushed in production because of the CI? 
+- Manually validate if CI is responsible for catching bugs? 
+- Not caught by CI: need to be more precise - 74% not part of a build. 
+- From those that were in build: how many bugs were actually caught by the CI? how many actually throw an error? 
+- Being caught by CI does not mean caught bugs: did tests fail or pass? (column tr_log_bool_tests_failed and tr_log_tests_failed from travis set) 
+- Were bugs fixed right after? if yes, then the CI might have captured it.
+- If not, then it might be that the CI didn't catch it -- validate that. 
+- Errored build: ex, missed dependency, build too long so crash, build stopped by dev so doesn't finish. 
+- Failed build: I guess more related to code. 
+- 16.1% are part of a build, not necessarily captured. Rephrase that everywhere. 
+
+Next meeting: friday 13h30. 
