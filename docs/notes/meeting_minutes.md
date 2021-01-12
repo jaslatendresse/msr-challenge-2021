@@ -111,7 +111,7 @@ Next:
 
 ## TODO
 
-- Send 10 additional projects to Diego for commit guru. 
+- ~~Send 10 additional projects to Diego for commit guru.~~ 
 - Validate fail 5 builds and the error builds. 
 - Remove pie chart and put table instead for proportion of bugs caught by CI. 
 -Be more specific about "caught by CI". 
