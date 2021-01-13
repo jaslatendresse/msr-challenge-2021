@@ -113,12 +113,11 @@ Next:
 
 - ~~Send 10 additional projects to Diego for commit guru.~~ 
 - Validate fail 5 builds and the error builds. 
-- Remove pie chart and put table instead for proportion of bugs caught by CI. 
-- Be more specific about "caught by CI". 
+- ~~Remove pie chart and put table instead for proportion of bugs caught by CI.~~
+- ~~Be more specific about "caught by CI".~~
 - With the lifespan, shows that CI did not catch it at all. 
-- Add number of instances in lifespan table. 
-- Abstract: rephrase "program repair" --> software maintenance or bug fixing. 
-- Sync overleaf with github (menu, sync, github) --> put all the documents in the folder msr-paper and sync it with overleaf. 
+- ~~Add number of instances in lifespan table.~~
+- ~~Abstract: rephrase "program repair" --> software maintenance or bug fixing.~~
 - Add datasets from database to repo (in csv file) 
 
 ## Brainstorming
