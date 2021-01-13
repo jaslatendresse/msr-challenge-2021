@@ -1,4 +1,4 @@
-# Database
+# The pipeline to format the data
 
 1. Create a new database
 2. Create the table `sstubs` (original dataset) from the python script.
