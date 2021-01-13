@@ -39,4 +39,15 @@ WHERE fixed_by!='';`
 
 `CREATE TABLE bug_with_fix AS SELECT commit_guru_formatted.commit_hash as bug, selected_sstubs.fixCommitSHA1 as bug_fix, selected_sstubs.bugType FROM selected_sstubs LEFT JOIN commit_guru_formatted WHERE fixCommitSHA1 = fixed_by GROUP BY fixCommitSHA1, bugTYpe`
 
-Then just replace the data in the data google sheets. 
+## How long do bugs stay in the code? 
+
+1. First, need to create a selected_sstubs table that contains commits that are in commit guru so we can access the author date:
+
+`CREATE TABLE selected_sstubs_with_date AS SELECT bugType, fixCommitSHA1, fixCommitParentSHA1, projectName, author_date, is_fix_commit FROM selected_sstubs LEFT JOIN commit_guru_formatted WHERE fixCommitSHA1 = commit_hash`
+
+2. Second, we query to check if a commit from this table is found in the fixed_by column of the commit_guru_formatted table:
+
+`SELECT selected_sstubs_with_date.author_date as fix_date, commit_guru_formatted.author_date as bug_date FROM selected_sstubs_with_date LEFT JOIN commit_guru_formatted WHERE fixCommitSHA1 = fixed_by`
+
+Then use the google sheet for calculations. 
+
