@@ -7,8 +7,7 @@
 4. Create TravisTorrent table `selected_travis_torrent` with the python script. DONE
 5. Format `selected_travis_torrent` to `selected_travis_torrent_formatted` with the following: 
 
-`UPDATE selected_travis
-SET fixed_by = REPLACE(fixed_by, '#', ',')`
+`UPDATE selected_travis SET gh_commits_in_push = REPLACE(gh_commits_in_push, '#', ',')`
 
  **add test bool and test log** 
  
