@@ -128,8 +128,7 @@ Still need to determine if we should remove duplicate rows, if so, modify GROUP 
 
 Before anything, I formatted the travis torrent table by exploding the gh_commits_in_push column as I did above for the commit guru table. 
 
-`UPDATE selected_travis
-SET gh_commits_in_push = REPLACE(fixed_by, '#', ',')`
+`UPDATE selected_travis SET gh_commits_in_push = REPLACE(gh_commits_in_push, '#', ',')`
 
  `CREATE TABLE selected_travis_formatted AS WITH RECURSIVE split(tr_build_id, tr_status, git_trigger_commit, gh_project_name, gh_is_pr, gh_commits_in_push, str) AS ( SELECT tr_build_id, tr_status, git_trigger_commit, gh_project_name, gh_is_pr, '', gh_commits_in_push||',' FROM selected_travis UNION ALL SELECT tr_build_id, tr_status, git_trigger_commit, gh_project_name, gh_is_pr, substr(str, 0, instr(str,',')), substr(str, instr(str,',')+1) FROM split WHERE str!='' ) SELECT tr_build_id, tr_status, git_trigger_commit, gh_project_name, gh_is_pr, gh_commits_in_push FROM split WHERE gh_commits_in_push!='';`
 
