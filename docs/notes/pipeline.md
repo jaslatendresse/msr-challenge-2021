@@ -1,11 +1,11 @@
 # The pipeline to format the data
 
-1. Create a new database DONE
-2. Create the table `sstubs` (original dataset) from the python script. DONE
+1. Create a new database **DONE**
+2. Create the table `sstubs` (original dataset) from the python script. **DONE**
 
-3. On TravisTorrent, query the dataset to obtain JSON files of new added projects. DONE 
-4. Create TravisTorrent table `selected_travis_torrent` with the python script. DONE
-5. Format `selected_travis_torrent` to `selected_travis_torrent_formatted` with the following: 
+3. On TravisTorrent, query the dataset to obtain JSON files of new added projects. **DONE** 
+4. Create TravisTorrent table `selected_travis_torrent` with the python script. **DONE**
+5. Format `selected_travis_torrent` to `selected_travis_torrent_formatted` with the following: **DONE**
 
 `UPDATE selected_travis SET gh_commits_in_push = REPLACE(gh_commits_in_push, '#', ',')`
 
