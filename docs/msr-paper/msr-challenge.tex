@@ -8,8 +8,11 @@
 \usepackage{multirow}
 \usepackage{caption} 
 
+\usepackage{balance}
+\usepackage[skins]{tcolorbox}
+
 \addbibresource{msr-challenge.bib}
-\renewcommand\IEEEkeywordsname{Keywords}
+%\renewcommand\IEEEkeywordsname{Keywords}
 
 \newlist{questions}{enumerate}{1}
 \setlist[questions]{label*=\textbf{RQ\arabic*.}}
@@ -18,6 +21,12 @@
 \hyphenation{op-tical net-works semi-conduc-tor}
 
 
+\newcommand{\conclusion}[1]{\begin{center}\begin{tcolorbox}[skin=widget, left=0.5mm,right=0.5mm,top=0.5mm,bottom=0.5mm,boxrule=0.3mm,arc=0mm,coltitle=black,colframe=black!99!white,colback=white!88!gray,width=(\linewidth),before=\hfill,after=\hfill]#1\end{tcolorbox}\end{center}}
+
+
+
+\newcommand{\rqi}{RQ1:  How many bugs were caught by the CI?}
+\newcommand{\rqii}{RQ2: How long do bugs stay in the code?}
 \begin{document}
 
 \title{Still need to find a title}
@@ -56,10 +65,15 @@ Email: diego.costa@concordia.ca}}
 Continuous Integration (CI) is the practice of automatically compiling, building, and testing code changes from multiple contributors to be integrated into a single code base. Bug fixing is one of the core tasks in software development and becomes increasingly costly over time. Hence, the development community has adopted Continuous Integration (CI) as a way to push changes into production as quickly as possible by integrating often; allowing to detect and locate errors quickly. However, little is known about how effective Continuous Integration (CI) is at detecting simple, one-line bugs. Hence, in this paper, we analyze the coverage of Continuous Integration (CI), particularly, Travis CI---a popular CI service provider, for simple, one-line bugs and study the lifespan of such bugs in the code base. We find that 13 (out of 16) bug types are detected and that 16.12\% of bugs from open source projects are associated with a CI build. We also find that simple, one-line bugs remain in the code base for a median time of 10.17 days before being fixed. This suggests that some bugs were immediately fixed and possibly never made it through the CI pipeline. More work is needed to determine why doesn't the CI catch certain bugs. 
 \end{abstract}
 
+\begin{IEEEkeywords}
+	Single bug, Continuous Integration
+\end{IEEEkeywords}
+
+
 \section{Introduction}
 This is the introduction section. Here is a test citation \cite{abdalkareem_2020_a}. Some text to see the indentation of the research questions. Some more text to check the indentation of the research questions.
 \begin{questions}
-    \item How many bugs were caught by the CI? \\ We find that 16.1\% of the bugs are caught by the CI pipeline. Indeed, on a total of 273 distinct mapped bug---fix found in Commit Guru, 44 were either part of a push that triggered a build, or triggered a build. 
+    \item How many bugs were caught by the CI? \\ We find that 16.1\% of the bugs are caught by the CI pipeline. Indeed, on a total of 273 distinct mapped bug---fix found in Commit Guru~\cite{RosenFSE2015}, 44 were either part of a push that triggered a build, or triggered a build. 
 \end{questions}
 \begin{questions}[resume]
     \item How long do bugs stay in the code? \\ On average, bugs stay in the code for 93.4 days with a median lifespan of 10.2 days. These results largely vary per bug type classification.  
@@ -79,6 +93,30 @@ How we selected the project for our analysis (how we filtered down to the 8 proj
 \subsection{Data Analysis}
 
 \section{Case Study Results}
+In this section, we present the results of our case study with respect to the three research questions. For each research question, we present the motivation for the question, the approach to answer the question, and results.
+
+\subsection*{\rqi}
+
+\noindent\textbf{Motivation:}
+
+\noindent\textbf{Approach:}
+
+\noindent\textbf{Result:}
+
+\conclusion{Summary of the findings of this RQ}
+
+\subsection*{\rqii}
+
+\noindent\textbf{Motivation:}
+
+
+\noindent\textbf{Approach:}
+
+
+\noindent\textbf{Result:}
+
+\conclusion{Summary of the findings of this RQ}
+
 
 \begin{table*}[t]
 \centering
@@ -143,6 +181,8 @@ CHANGE\_OPERATOR                   & -                       & -                
 \section{Conclusions}
 
 \printbibliography
+
+
 
 \end{document}
 
