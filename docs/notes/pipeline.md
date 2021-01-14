@@ -19,8 +19,7 @@ SET fixed_by = REPLACE(fixed_by, '#', ',')`
  7. Create table `commit_guru` with the python script. 
  8. Format table `commit_guru` to `commit_guru_formatted`
  
- `UPDATE commit_guru
-SET fixed_by = REPLACE(fixed_by, ';', ',')`
+ `UPDATE selected_travis SET gh_commits_in_push = REPLACE(fixed_by, '#', ',')`
 
 `CREATE TABLE commit_guru_formatted AS
 WITH RECURSIVE split(commit_id, commit_hash, buggy, repository_id, author_date, is_fix_commit, fixed_by, str) AS (
