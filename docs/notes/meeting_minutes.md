@@ -135,3 +135,50 @@ Next:
 - 16.1% are part of a build, not necessarily captured. Rephrase that everywhere. 
 
 Next meeting: friday 13h30. 
+
+# 2021-01-15
+
+## Brainstorming 
+
+Can CI help indicate one-line bugs? Probably not when the bugs was introduced
+
+Need to investigate before/after the fix for all commits (closer to the fix). 
+
+Repeat build failed tests, etc after the bug fix comes. 
+
+CI capturing the introduction of the bug may be enough 
+
+- Bugs stay in the code for a long time
+- CI does not fail immediately
+- CI doesn't help with those bugs 
+
+## Some important numbers 
+
+How many fixes have a build? 366/1284. -- 366 fixes out of 1284 are associated with a CI build. 
+
+6/366 failed or errored in the previous build. 
+
+How many previous builds have failed? Previous build of the build associated with the fix commit. 
+
+Can CI help us catch this at bug intro time? No
+
+Can CI help us catch the bug before the fix? No 
+
+`CREATE TABLE selected_travis_formatted AS WITH RECURSIVE split(tr_build_id, tr_status, tr_prev_build, git_trigger_commit, gh_project_name, gh_is_pr, gh_commits_in_push, str) AS ( SELECT tr_build_id, tr_status, tr_prev_build, git_trigger_commit, gh_project_name, gh_is_pr, '', gh_commits_in_push||',' FROM selected_travis UNION ALL SELECT tr_build_id, tr_status, tr_prev_build, git_trigger_commit, gh_project_name, gh_is_pr, substr(str, 0, instr(str,',')), substr(str, instr(str,',')+1) FROM split WHERE str!='' ) SELECT tr_build_id, tr_status, tr_prev_build, git_trigger_commit, gh_project_name, gh_is_pr, gh_commits_in_push FROM split WHERE gh_commits_in_push!=''`
+
+`SELECT builds.tr_build_id, builds.tr_status FROM builds LEFT JOIN selected_travis_formatted WHERE builds.tr_prev_build = selected_travis_formatted.git_trigger_commit OR builds.tr_prev_build = selected_travis_formatted.gh_commits_in_push GROUP BY builds.tr_build_id`
+
+## Direction of the paper 
+
+Have paper focus on bug introducing commits
+
+Can CI help warn about one-line bugs? (title)
+
+CI is meant to conduct "checks" and helps catch bugs quickly, we want to know if they catch one-line bugs. 
+
+### RQS
+
+- How many bug inducing commits does CI fail on? - 5
+- Why are they not caught? - tests coverage, some just don't fail, some just no tests, etc. 
+
+Challenges and possible threats to validity: traceability is difficult (map bug fix - bug induce lose a lot of data, bugs might not be very severe so the build doesn't fail --> they end up living in the code for a long time)
