@@ -41,7 +41,7 @@ WHERE fixed_by!='';`
 
 1. First, need to create a selected_sstubs table that contains commits that are in commit guru so we can access the author date: **DONE**
 
-`CREATE TABLE selected_sstubs_with_date AS SELECT bugType, fixCommitSHA1, fixCommitParentSHA1, projectName, author_date, is_fix_commit FROM selected_sstubs LEFT JOIN commit_guru_formatted WHERE fixCommitSHA1 = commit_hash`
+`CREATE TABLE selected_sstubs_with_date AS SELECT bugType, fixCommitSHA1, projectName, author_date, is_fix_commit FROM selected_sstubs LEFT JOIN commit_guru_formatted WHERE fixCommitSHA1 = commit_hash`
 
 2. Second, we query to check if a commit from this table is found in the fixed_by column of the commit_guru_formatted table:
 
