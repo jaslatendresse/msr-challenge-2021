@@ -56,7 +56,7 @@ def create_table(file_in, database, table_name):
             print("Error! cannot create the database connection.")
 
 def create_commit_guru_table(commit_guru_file, database):
-    commits = pd.read_csv(commit_guru_file)
+    commits = pd.read_csv(commit_guru_file, encoding = "ISO-8859-1")
     conn = create_connection(database)
 
     commits.to_sql('commit_guru', conn, if_exists = 'append', index = False)
