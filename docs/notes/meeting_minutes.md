@@ -166,7 +166,7 @@ Can CI help us catch the bug before the fix? No
 
 `CREATE TABLE selected_travis_formatted AS WITH RECURSIVE split(tr_build_id, tr_status, git_trigger_commit, gh_project_name, gh_is_pr, tr_log_bool_tests_ran, tr_log_bool_tests_failed, tr_log_tests_failed, tr_prev_build, gh_commits_in_push, str) AS ( SELECT tr_build_id, tr_status, git_trigger_commit, gh_project_name, gh_is_pr, tr_log_bool_tests_ran, tr_log_bool_tests_failed, tr_log_tests_failed, tr_prev_build, '', gh_commits_in_push||',' FROM selected_travis UNION ALL SELECT tr_build_id, tr_status, git_trigger_commit, gh_project_name, gh_is_pr, tr_log_bool_tests_ran, tr_log_bool_tests_failed, tr_log_tests_failed, tr_prev_build, substr(str, 0, instr(str,',')), substr(str, instr(str,',')+1) FROM split WHERE str!='' ) SELECT tr_build_id, tr_status, git_trigger_commit, gh_project_name, gh_is_pr, tr_log_bool_tests_ran, tr_log_bool_tests_failed, tr_log_tests_failed, tr_prev_build, gh_commits_in_push FROM split WHERE gh_commits_in_push!=''`
 
-`SELECT builds.tr_build_id, builds.tr_status FROM builds LEFT JOIN selected_travis_formatted WHERE builds.tr_prev_build = selected_travis_formatted.git_trigger_commit OR builds.tr_prev_build = selected_travis_formatted.gh_commits_in_push GROUP BY builds.tr_build_id`
+`CREATE TABLE builds_before_fix AS SELECT builds.tr_build_id, builds.tr_status, builds.tr_log_bool_tests_failed, builds.tr_log_tests_failed FROM builds LEFT JOIN selected_travis_formatted WHERE builds.tr_prev_build = selected_travis_formatted.git_trigger_commit OR builds.tr_prev_build = selected_travis_formatted.gh_commits_in_push GROUP BY builds.tr_build_id`
 
 ## Direction of the paper 
 
