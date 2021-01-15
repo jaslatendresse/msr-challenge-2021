@@ -1,26 +1,24 @@
 # The pipeline to format the data
 
-1. Create a new database
-2. Create the table `sstubs` (original dataset) from the python script.
+1. Create a new database **DONE**
+2. Create the table `sstubs` (original dataset) from the python script. **DONE**
 
-3. On TravisTorrent, query the dataset to obtain JSON files of new added projects. 
-4. Create TravisTorrent table `selected_travis_torrent` with the python script. 
-5. Format `selected_travis_torrent` to `selected_travis_torrent_formatted` with the following: 
+3. On TravisTorrent, query the dataset to obtain JSON files of new added projects. **DONE** 
+4. Create TravisTorrent table `selected_travis_torrent` with the python script. **DONE**
+5. Format `selected_travis_torrent` to `selected_travis_torrent_formatted` with the following: **DONE**
 
-`UPDATE selected_travis
-SET fixed_by = REPLACE(fixed_by, '#', ',')`
+`UPDATE selected_travis SET gh_commits_in_push = REPLACE(gh_commits_in_push, '#', ',')`
 
  **add test bool and test log** 
  
- `CREATE TABLE selected_travis_formatted AS WITH RECURSIVE split(tr_build_id, tr_status, git_trigger_commit, gh_project_name, gh_is_pr, gh_commits_in_push, str) AS ( SELECT tr_build_id, tr_status, git_trigger_commit, gh_project_name, gh_is_pr, '', gh_commits_in_push||',' FROM selected_travis UNION ALL SELECT tr_build_id, tr_status, git_trigger_commit, gh_project_name, gh_is_pr, substr(str, 0, instr(str,',')), substr(str, instr(str,',')+1) FROM split WHERE str!='' ) 
- SELECT tr_build_id, tr_status, git_trigger_commit, gh_project_name, gh_is_pr, gh_commits_in_push FROM split WHERE gh_commits_in_push!='';`
+ `CREATE TABLE selected_travis_formatted AS WITH RECURSIVE split(tr_build_id, tr_status, git_trigger_commit, gh_project_name, gh_is_pr, tr_log_bool_tests_ran, tr_log_bool_tests_failed, tr_log_tests_failed, gh_commits_in_push, str) AS ( SELECT tr_build_id, tr_status, git_trigger_commit, gh_project_name, gh_is_pr, tr_log_bool_tests_ran, tr_log_bool_tests_failed, tr_log_tests_failed, '', gh_commits_in_push||',' FROM selected_travis UNION ALL SELECT tr_build_id, tr_status, git_trigger_commit, gh_project_name, gh_is_pr, tr_log_bool_tests_ran, tr_log_bool_tests_failed, tr_log_tests_failed, substr(str, 0, instr(str,',')), substr(str, instr(str,',')+1) FROM split WHERE str!='' ) 
+ SELECT tr_build_id, tr_status, git_trigger_commit, gh_project_name, gh_is_pr, tr_log_bool_tests_ran, tr_log_bool_tests_failed, tr_log_tests_failed, gh_commits_in_push FROM split WHERE gh_commits_in_push!='';`
  
- 6. Create table `selected_sstubs` from the python script. 
+ 6. Create table `selected_sstubs` from the python script. DONE
  7. Create table `commit_guru` with the python script. 
  8. Format table `commit_guru` to `commit_guru_formatted`
  
- `UPDATE commit_guru
-SET fixed_by = REPLACE(fixed_by, ';', ',')`
+ `UPDATE selected_travis SET gh_commits_in_push = REPLACE(fixed_by, '#', ',')`
 
 `CREATE TABLE commit_guru_formatted AS
 WITH RECURSIVE split(commit_id, commit_hash, buggy, repository_id, author_date, is_fix_commit, fixed_by, str) AS (
