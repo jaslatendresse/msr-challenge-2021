@@ -65,9 +65,27 @@ def create_commit_guru_table(commit_guru_file, database):
 
 def main():
     database = r"../sqlite/db/msr_challenge.db"
+    
+    # JSON files
     sstubs = 'docs/json-data/sstubs.json'
     selected_travis = 'docs/json-data/selected_travis.json'
     selected_sstubs = 'docs/json-data/selected_sstubs.json'
+
+    # CSV files
+    apache_flink = 'docs/commit-guru/apache-flink.csv'
+    apache_storm = 'docs/commit-guru/apache-storm.csv'
+    checkstyle = 'docs/commit-guru/checkstyle.csv'
+    closure_compiler = 'docs/commit-guru/closure-compiler.csv'
+    dropwizard_dropwizard = 'docs/commit-guru/dropwizard-dropwizard.csv'
+    dropwizard_metrics = 'docs/commit-guru/dropwizard-metrics.csv'
+    druid = 'docs/commit-guru/druid.csv'
+    google_guice = 'docs/commit-guru/google-guice.csv'
+    graylog2 = 'docs/commit-guru/graylog2.csv'
+    jedis = 'docs/commit-guru/jedis.csv'
+    junit = 'docs/commit-guru/junit-team-junit.csv'
+    mybatis = 'docs/commit-guru/mybatis-mybatis-3.csv'
+    naver = 'docs/commit-guru/naver-pinpoint.csv'
+    presto = 'docs/commit-guru/presto.csv'
 
     # Commits from the original Sstubs dataset 
     create_table(sstubs, database, 'sstubs')
@@ -76,9 +94,23 @@ def main():
     create_table(selected_travis, database, 'selected_travis')
 
     # Sstubs Commits from selected projects
-    create_table(selected_sstubs, database, 'selected_sstubss')
+    create_table(selected_sstubs, database, 'selected_sstubs')
 
-    # Project in CommitGuru
+    # Commit Guru Table
+    create_commit_guru_table(apache_flink, database)
+    create_commit_guru_table(apache_storm, database)
+    create_commit_guru_table(checkstyle, database)
+    create_commit_guru_table(closure_compiler, database)
+    create_commit_guru_table(dropwizard_dropwizard, database)
+    create_commit_guru_table(dropwizard_metrics, database)
+    create_commit_guru_table(druid, database)
+    create_commit_guru_table(google_guice, database)
+    create_commit_guru_table(graylog2, database)
+    create_commit_guru_table(jedis, database)
+    create_commit_guru_table(mybatis, database)
+    create_commit_guru_table(naver, database)
+    create_commit_guru_table(presto, database)
+    create_commit_guru_table(junit, database)
 
 if __name__ == '__main__':
     main()
