@@ -14,11 +14,11 @@
  `CREATE TABLE selected_travis_formatted AS WITH RECURSIVE split(tr_build_id, tr_status, git_trigger_commit, gh_project_name, gh_is_pr, tr_log_bool_tests_ran, tr_log_bool_tests_failed, tr_log_tests_failed, gh_commits_in_push, str) AS ( SELECT tr_build_id, tr_status, git_trigger_commit, gh_project_name, gh_is_pr, tr_log_bool_tests_ran, tr_log_bool_tests_failed, tr_log_tests_failed, '', gh_commits_in_push||',' FROM selected_travis UNION ALL SELECT tr_build_id, tr_status, git_trigger_commit, gh_project_name, gh_is_pr, tr_log_bool_tests_ran, tr_log_bool_tests_failed, tr_log_tests_failed, substr(str, 0, instr(str,',')), substr(str, instr(str,',')+1) FROM split WHERE str!='' ) 
  SELECT tr_build_id, tr_status, git_trigger_commit, gh_project_name, gh_is_pr, tr_log_bool_tests_ran, tr_log_bool_tests_failed, tr_log_tests_failed, gh_commits_in_push FROM split WHERE gh_commits_in_push!='';`
  
- 6. Create table `selected_sstubs` from the python script. DONE
- 7. Create table `commit_guru` with the python script. 
- 8. Format table `commit_guru` to `commit_guru_formatted`
+ 6. Create table `selected_sstubs` from the python script. **DONE**
+ 7. Create table `commit_guru` with the python script. **DONE**
+ 8. Format table `commit_guru` to `commit_guru_formatted` **DONE**
  
- `UPDATE selected_travis SET gh_commits_in_push = REPLACE(fixed_by, '#', ',')`
+ `UPDATE commit_guru SET fixed_by = REPLACE(fixed_by, '#', ',')`
 
 `CREATE TABLE commit_guru_formatted AS
 WITH RECURSIVE split(commit_id, commit_hash, buggy, repository_id, author_date, is_fix_commit, fixed_by, str) AS (
@@ -33,13 +33,13 @@ SELECT commit_id, commit_hash, buggy, repository_id, author_date, is_fix_commit,
 FROM split
 WHERE fixed_by!='';`
 
-9. Create the mapping table `bug_with_fix`
+9. Create the mapping table `bug_with_fix` **DONE**
 
 `CREATE TABLE bug_with_fix AS SELECT commit_guru_formatted.commit_hash as bug, selected_sstubs.fixCommitSHA1 as bug_fix, selected_sstubs.bugType FROM selected_sstubs LEFT JOIN commit_guru_formatted WHERE fixCommitSHA1 = fixed_by GROUP BY fixCommitSHA1, bugTYpe`
 
 ## How long do bugs stay in the code? 
 
-1. First, need to create a selected_sstubs table that contains commits that are in commit guru so we can access the author date:
+1. First, need to create a selected_sstubs table that contains commits that are in commit guru so we can access the author date: **DONE**
 
 `CREATE TABLE selected_sstubs_with_date AS SELECT bugType, fixCommitSHA1, fixCommitParentSHA1, projectName, author_date, is_fix_commit FROM selected_sstubs LEFT JOIN commit_guru_formatted WHERE fixCommitSHA1 = commit_hash`
 
