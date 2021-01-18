@@ -20,7 +20,7 @@
 % correct bad hyphenation here
 \hyphenation{op-tical net-works semi-conduc-tor}
 
-\title{Can Continuous Integration Help Warn about One-line Bugs?}
+\title{Can Continuous Integration Help Warn about Single-statement Bugs?}
 
 \newcommand{\conclusion}[1]{\begin{center}\begin{tcolorbox}[skin=widget, left=0.5mm,right=0.5mm,top=0.5mm,bottom=0.5mm,boxrule=0.3mm,arc=0mm,coltitle=black,colframe=black!99!white,colback=white!88!gray,width=(\linewidth),before=\hfill,after=\hfill]#1\end{tcolorbox}\end{center}}
 
@@ -30,8 +30,8 @@
   \mbox{}\hfill\begin{@IEEEauthorhalign}
 }
 
-\newcommand{\rqi}{RQ1:  How many bug-inducing commits does CI fail on?}
-\newcommand{\rqii}{RQ2: Why aren't one-line bugs caught by CI?}
+\newcommand{\rqi}{RQ1:  How many single-statement bug-inducing commits does CI fail on?}
+\newcommand{\rqii}{RQ2: Why aren't single-statement bugs caught by CI?}
 
 \begin{document}
 
@@ -72,11 +72,11 @@ emad.shihab@concordia.ca}}
 % As a general rule, do not put math, special symbols or citations
 % in the abstract
 \begin{abstract}
-Continuous Integration (CI) is the practice of automatically compiling, building, and testing code changes from multiple contributors to be integrated into a single code base. Bug fixing is one of the core tasks in software development and becomes increasingly costly over time. Hence, the development community has adopted Continuous Integration (CI) as a way to push changes into production as quickly as possible by integrating often; allowing to detect and locate errors quickly. However, little is known about how effective Continuous Integration (CI) is at detecting simple, one-line bugs. Hence, in this paper, we analyze the coverage of Continuous Integration (CI), particularly, Travis CI---a popular CI service provider, of failed builds for simple, one-line bugs. We find that 15.72\% of the bug-inducing commits from open source projects are associated with a CI build and that only 10\% of the CI builds are flagged as failed after the bug-inducing commit is introduced to the code base. 
+Continuous Integration (CI) is the practice of automatically compiling, building, and testing code changes from multiple contributors to be integrated into a single code base. Bug fixing is one of the core tasks in software development and becomes increasingly costly over time. Hence, the development community has adopted Continuous Integration (CI) as a way to push changes into production as quickly as possible by integrating often; allowing to detect and locate errors quickly. However, little is known about how effective Continuous Integration (CI) is at detecting simple, one-line bugs. Hence, in this paper, we analyze the coverage of Continuous Integration (CI), particularly, Travis CI---a popular CI service provider, of failed builds for simple, single-statement bugs. We find that 15.72\% of the bug-inducing commits from open source projects are associated with a CI build and that only 10\% of the CI builds are flagged as failed after the bug-inducing commit is introduced to the code base. 
 \end{abstract}
 
 \begin{IEEEkeywords}
-	One-line bug, Continuous Integration, Software Development
+	Single-statement bug, Continuous Integration, Software Development
 \end{IEEEkeywords}
 
 \section{Introduction}
@@ -84,10 +84,10 @@ Continuous Integration (CI) is an increasingly popular practice adopted by the s
 
 
 \begin{questions}
-    \item How many bug-inducing commits does CI fail on? \\ Our findings show that 10\% of the builds fail after the bug-inducing commit is introduced to the code base. 
+    \item How many single-statement bug-inducing commits does CI fail on? \\ Our findings show that 10\% of the builds fail after the bug-inducing commit is introduced to the code base. 
 \end{questions}
 \begin{questions}[resume]
-    \item Why aren't one-line bugs caught by the CI? \\ We find that 66.7\% of the failed builds preceding the fix commit introduction have no tests and that this proportion is reduced to 45.5\% after the fix commit introduction. 
+    \item Why aren't single-statement bugs caught by the CI? \\ We find that 66.7\% of the failed builds preceding the fix commit introduction have no tests and that this proportion is reduced to 45.5\% after the fix commit introduction. 
 \end{questions}
 
 \section{Case Study Design}
