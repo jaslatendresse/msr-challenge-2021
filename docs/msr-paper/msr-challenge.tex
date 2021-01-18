@@ -20,17 +20,20 @@
 % correct bad hyphenation here
 \hyphenation{op-tical net-works semi-conduc-tor}
 
+\title{Can Continuous Integration Help Warn about One-line Bugs?}
 
 \newcommand{\conclusion}[1]{\begin{center}\begin{tcolorbox}[skin=widget, left=0.5mm,right=0.5mm,top=0.5mm,bottom=0.5mm,boxrule=0.3mm,arc=0mm,coltitle=black,colframe=black!99!white,colback=white!88!gray,width=(\linewidth),before=\hfill,after=\hfill]#1\end{tcolorbox}\end{center}}
 
-
+\newcommand{\linebreakand}{%
+  \end{@IEEEauthorhalign}
+  \hfill\mbox{}\par
+  \mbox{}\hfill\begin{@IEEEauthorhalign}
+}
 
 \newcommand{\rqi}{RQ1:  How many bugs were caught by the CI?}
 \newcommand{\rqii}{RQ2: How long do bugs stay in the code?}
+
 \begin{document}
-
-\title{Still need to find a title}
-
 
 % author names and affiliations
 % use a multiple column layout for up to three different
@@ -40,21 +43,28 @@
 Department of Computer Science and\\
 Software Engineering\\
 Montreal, Canada\\
-Email: latendresse.jasmine@gmail.com}
+j\_latend@encs.concordia.ca}
 \and
 \IEEEauthorblockN{Rabe Abdalkareem}
 \IEEEauthorblockA{Concordia University\\
 Department of Computer Science and\\
 Software Engineering\\
 Montreal, Canada\\
-Email: INCLUDE EMAIL}
+INCLUDE EMAIL}
 \and
 \IEEEauthorblockN{Diego Elias Costa}
 \IEEEauthorblockA{Concordia University\\
 Department of Computer Science and\\
 Software Engineering\\
 Montreal, Canada\\
-Email: diego.costa@concordia.ca}}
+diego.costa@concordia.ca}
+\linebreakand
+\IEEEauthorblockN{Emad Shihab}
+\IEEEauthorblockA{Concordia University\\
+Department of Computer Science and\\
+Software Engineering\\
+Montreal, Canada\\
+emad.shihab@concordia.ca}}
 
 % make the title area
 \maketitle
@@ -62,21 +72,20 @@ Email: diego.costa@concordia.ca}}
 % As a general rule, do not put math, special symbols or citations
 % in the abstract
 \begin{abstract}
-Continuous Integration (CI) is the practice of automatically compiling, building, and testing code changes from multiple contributors to be integrated into a single code base. Bug fixing is one of the core tasks in software development and becomes increasingly costly over time. Hence, the development community has adopted Continuous Integration (CI) as a way to push changes into production as quickly as possible by integrating often; allowing to detect and locate errors quickly. However, little is known about how effective Continuous Integration (CI) is at detecting simple, one-line bugs. Hence, in this paper, we analyze the coverage of Continuous Integration (CI), particularly, Travis CI---a popular CI service provider, for simple, one-line bugs and study the lifespan of such bugs in the code base. We find that 13 (out of 16) bug types are detected and that 16.12\% of bugs from open source projects are associated with a CI build. We also find that simple, one-line bugs remain in the code base for a median time of 10.17 days before being fixed. This suggests that some bugs were immediately fixed and possibly never made it through the CI pipeline. More work is needed to determine why doesn't the CI catch certain bugs. 
+Continuous Integration (CI) is the practice of automatically compiling, building, and testing code changes from multiple contributors to be integrated into a single code base. Bug fixing is one of the core tasks in software development and becomes increasingly costly over time. Hence, the development community has adopted Continuous Integration (CI) as a way to push changes into production as quickly as possible by integrating often; allowing to detect and locate errors quickly. However, little is known about how effective Continuous Integration (CI) is at detecting simple, one-line bugs. Hence, in this paper, we analyze the coverage of Continuous Integration (CI), particularly, Travis CI---a popular CI service provider, of failed builds for simple, one-line bugs. We find that 15.72\% of the bug-inducing commits from open source projects are associated with a CI build and that only 10\% of the CI builds are flagged as failed after the bug-inducing commit is introduced to the code base. 
 \end{abstract}
 
 \begin{IEEEkeywords}
-	Single bug, Continuous Integration
+	One-line bug, Continuous Integration, Software Development
 \end{IEEEkeywords}
-
 
 \section{Introduction}
 This is the introduction section. Here is a test citation \cite{abdalkareem_2020_a}. Some text to see the indentation of the research questions. Some more text to check the indentation of the research questions.
 \begin{questions}
-    \item How many bugs were caught by the CI? \\ We find that 16.1\% of the bugs are caught by the CI pipeline. Indeed, on a total of 273 distinct mapped bug---fix found in Commit Guru~\cite{RosenFSE2015}, 44 were either part of a push that triggered a build, or triggered a build. 
+    \item How many bug-inducing commits does CI fail on? \\ Our findings show that 10\% of the builds fail after the bug-inducing commit is introduced to the code base. For the build immediately before the fix is introduced, 5.26\% of the builds fail. This suggests that the CI pipeline failed to detect the bugs when the bug-inducing commit was first pushed into the code base or before it was fixed. 
 \end{questions}
 \begin{questions}[resume]
-    \item How long do bugs stay in the code? \\ On average, bugs stay in the code for 93.4 days with a median lifespan of 10.2 days. These results largely vary per bug type classification.  
+    \item Why aren't one-line bugs caught by the CI? \\ We find that 66.7\% of the failed builds preceding the fix commit introduction have no tests and that this proportion is reduced to 45.5\% after the fix commit introduction. This suggests that in some cases, bug-inducing commits had no test coverage making it impossible for the CI pipeline to detect. 
 \end{questions}
 
 \section{Case Study Design}
@@ -117,66 +126,71 @@ In this section, we present the results of our case study with respect to the th
 
 \conclusion{Summary of the findings of this RQ}
 
-
 \begin{table*}[t]
 \centering
-\begin{tabular}{lll}
+\begin{tabular}{lll|lll}
 \hline
-Caught by Commit Guru         & Distinct (bug\_hash, fix\_hash, bug\_type) mappings     & 273    \\ \hline
-\multirow{3}{*}{Caught by CI} & Build trigger, not in push commits                    & 8      \\
-                              & In push commits, not a trigger                        & 17     \\
-                              & Trigger or in push commits                            & 44     \\ \hline
-Coverage                      & Distinct (bug\_hash, fix\_hash, bug\_type) caught by CI & 16.1\% \\ \hline
+\multicolumn{3}{l|}{}                                      & Failed tests & Passed tests & No tests \\ \hline
+\multirow{3}{*}{tr\_build\_status} & Pass  & 82\% & 0\%          & 78,05\%      & 21,95\%  \\
+                                            & Fail  & 10\% & 60\%         & 20\%         & 20\%     \\
+                                            & Error & 36\% & 6\%          & 16,67\%      & 77,78\%  \\ \hline
 \end{tabular}
-\caption{Distinct Bugs Caught by Travis CI.}
-\label{tab:caughtbytravis}
+\label{tab:bugintro}
+\caption{Build status of Travis CI builds at bug-inducing commit introduction. \\ (Traceability--50 builds)}
+\end{table*}
+
+% Please add the following required packages to your document preamble:
+% \usepackage{multirow}
+\begin{table*}[t]
+\centering
+\begin{tabular}{lll|lll}
+\hline
+\multicolumn{3}{l|}{}                                & Failed tests & Passed tests & No tests \\ \hline
+\multirow{3}{*}{tr\_build\_status} & Pass  & 89,47\% & 5,88\%       & 68,63\%      & 25,49\%  \\
+                                   & Fail  & 5,26\%  & 33\%         & 0\%          & 66,67\%  \\
+                                   & Error & 5,26\%  & 0\%          & 33,33\%      & 66,67\%  \\ \hline
+\end{tabular}
+\label{tab:beforefix}
+\caption{Build Status of Travis CI builds before the fix commit is introduced. \\ (Traceability--57 builds)}
 \end{table*}
 
 \begin{table*}[t]
 \centering
+\begin{tabular}{lll|lll}
+\hline
+\multicolumn{3}{l|}{}                                & Failed tests & Passed tests & No tests \\ \hline
+\multirow{3}{*}{tr\_build\_status} & Pass  & 83,33\% & 1,64\%       & 70,07\%      & 28,62\%  \\
+                                   & Fail  & 12,02\% & 34,09\%      & 20,45\%      & 45,45\%  \\
+                                   & Error & 4,64\%  & 0\%          & 23,53\%      & 76,47\%  \\ \hline
+\end{tabular}
+\label{tab:afterfix}
+\caption{Build Status of Travis CI builds after the fix commit is introduced. \\ (Traceability--366 builds)}
+\end{table*}
+
+\begin{table*}[t]
 \begin{tabular}{llll}
 \hline
-Caught by TravisTorrent            & Distinct (bug\_hash, fix\_hash, bug\_type, tr\_build\_id) mappings & 56 &        \\ \hline
-\multirow{3}{*}{tr\_build\_status} & Pass                                                               & 34 & 60.7\% \\
-                                   & Fail                                                               & 5  & 8.9\%  \\
-                                   & Error                                                              & 17 & 30.4\% \\ \hline
+Bug Type                           & Average Lifespan (days) & Median Lifespan (days) & Number of instances associated with a CI build \\ \hline
+CHANGE\_IDENTIFIER                 & 57.0                    & 10.0                   & 16                                             \\
+DIFFERENT\_METHOD\_SAME\_ARGS      & 68.1                    & 6.7                    & 6                                              \\
+CHANGE\_MODIFIER                   & 202.8                   & 6.8                    & 5                                              \\
+CHANGE\_NUMERAL                    & 31.23                   & 6.1                    & 4                                              \\
+CHANGE\_CALLER\_IN\_FUNCTION\_CALL & 5.6                     & 5.6                    & 3                                              \\
+SWAP\_BOOLEAN\_LITERAL             & 89.4                    & 89.4                   & 2                                              \\
+OVERLOAD\_METHOD\_MORE\_ARGS       & 110.2                   & 110.2                  & 1                                              \\
+LESS\_SPECIFIC\_IF                 & 10.6                    & 10.6                   & 1                                              \\
+OVERLOAD\_METHOD\_DELETED\_ARGS    & 68.6                    & 68.6                   & 1                                              \\
+SWAP\_ARGUMENTS                    & 0.9                     & 0.9                    & 1                                              \\
+CHANGE\_OPERAND                    & -                       & -                      & -                                              \\
+CHANGE\_UNARY\_OPERATOR            & -                       & -                      & -                                              \\
+DELETE\_THROWS\_EXCEPTION          & -                       & -                      & -                                              \\
+MORE\_SPECIFIC\_IF                 & -                       & -                      & -                                              \\
+ADD\_THROWS\_EXCEPTION             & -                       & -                      & -                                              \\
+CHANGE\_OPERATOR                   & -                       & -                      & -                                              \\ \hline
 \end{tabular}
-\caption{Distinct Bugs---Builds Mappings Caught by Travis CI. }
-\label{tab:buildstatus}
-\end{table*}
-
-%\begin{figure}[h]
-%\includegraphics[width=\linewidth]{bugtypes.png}
-%\caption{Proportion of Bug Types caught by the CI Pipeline.}
-%\label{fig:process}
-%\end{figure}
-
-\begin{table*}[]
-\centering
-\begin{tabular}{lll}
-\hline
-Bug Type                           & Average Lifespan (days) & Median Lifespan (days) \\ \hline
-CHANGE\_IDENTIFIER                 & 70,4                    & 10,2                   \\
-OVERLOAD\_METHOD\_MORE\_ARGS       & 435,8                   & 435,8                  \\
-CHANGE\_MODIFIER                   & 268,3                   & 8,46                   \\
-DIFFERENT\_METHOD\_SAME\_ARGS      & 59,6                    & 7,4                    \\
-CHANGE\_NUMERAL                    & 25,14                   & 6,4                    \\
-CHANGE\_CALLER\_IN\_FUNCTION\_CALL & 13,2                    & 13,2                   \\
-LESS\_SPECIFIC\_IF                 & 10,6                    & 10,6                   \\
-OVERLOAD\_METHOD\_DELETED\_ARGS    & 68,6                    & 68,6                   \\
-SWAP\_BOOLEAN\_LITERAL             & 67,9                    & 67,9                   \\
-SWAP\_ARGUMENTS                    & 16,2                    & 16,2                   \\
-CHANGE\_OPERAND                    & -                       & -                      \\
-CHANGE\_UNARY\_OPERATOR            & -                       & -                      \\
-DELETE\_THROWS\_EXCEPTION          & -                       & -                      \\
-MORE\_SPECIFIC\_IF                 & -                       & -                      \\
-ADD\_THROWS\_EXCEPTION             & -                       & -                      \\
-CHANGE\_OPERATOR                   & -                       & -                      \\ \hline
-\end{tabular}
-\caption{Lifespan per Bug Type}
 \label{tab:lifespan}
+\caption{Average and Median Lifespan per Bug Type.}
 \end{table*}
-
 
 \section{Conclusions}
 
