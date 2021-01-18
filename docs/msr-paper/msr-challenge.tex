@@ -80,12 +80,14 @@ Continuous Integration (CI) is the practice of automatically compiling, building
 \end{IEEEkeywords}
 
 \section{Introduction}
-This is the introduction section. Here is a test citation \cite{abdalkareem_2020_a}. Some text to see the indentation of the research questions. Some more text to check the indentation of the research questions.
+Continuous Integration (CI) is an increasingly popular practice adopted by the software industry to automate the compilation, building, testing, and deployment of software. With CI, incremental changes brought to the code base are more atomic which in theory makes bug detection simpler and quicker. Early bug detection and reporting significantly reduces overhead since it allows developers to fix faults and make possible critical decisions earlier in the project's lifecycle; having fewer unintended consequences.
+
+
 \begin{questions}
-    \item How many bug-inducing commits does CI fail on? \\ Our findings show that 10\% of the builds fail after the bug-inducing commit is introduced to the code base. For the build immediately before the fix is introduced, 5.26\% of the builds fail. This suggests that the CI pipeline failed to detect the bugs when the bug-inducing commit was first pushed into the code base or before it was fixed. 
+    \item How many bug-inducing commits does CI fail on? \\ Our findings show that 10\% of the builds fail after the bug-inducing commit is introduced to the code base. 
 \end{questions}
 \begin{questions}[resume]
-    \item Why aren't one-line bugs caught by the CI? \\ We find that 66.7\% of the failed builds preceding the fix commit introduction have no tests and that this proportion is reduced to 45.5\% after the fix commit introduction. This suggests that in some cases, bug-inducing commits had no test coverage making it impossible for the CI pipeline to detect. 
+    \item Why aren't one-line bugs caught by the CI? \\ We find that 66.7\% of the failed builds preceding the fix commit introduction have no tests and that this proportion is reduced to 45.5\% after the fix commit introduction. 
 \end{questions}
 
 \section{Case Study Design}
