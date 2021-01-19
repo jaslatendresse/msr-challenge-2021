@@ -80,8 +80,7 @@ Continuous Integration (CI) is the practice of automatically compiling, building
 \end{IEEEkeywords}
 
 \section{Introduction}
-Continuous Integration (CI) is an increasingly popular practice adopted by the software industry to automate the compilation, building, testing, and deployment of software. With CI, incremental changes brought to the code base are more atomic which in theory makes bug detection simpler and quicker. Early bug detection and reporting significantly reduces overhead since it allows developers to fix faults and make possible critical decisions earlier in the project's lifecycle; having fewer unintended consequences.
-
+Continuous Integration (CI) is an increasingly popular practice adopted by the software industry to automate the compilation, building, testing, and deployment of software. With CI, incremental changes brought to the code base are more atomic which in theory makes bug detection simpler and quicker. Early bug detection and reporting significantly reduces overhead since it allows developers to fix faults and make possible critical decisions earlier in the project's lifecycle; having fewer unintended consequences. TO BE CONTINUED.
 
 \begin{questions}
     \item How many single-statement bug-inducing commits does CI fail on? \\ Our findings show that 10\% of the builds fail after the bug-inducing commit is introduced to the code base. 
@@ -100,15 +99,14 @@ In this section, we discuss each step of the approach that we use to analyze the
 \label{fig:process}
 \end{figure*}
 
-%How we selected the project for our analysis (how we filtered down to the 8 projects we have, what were the criteria, etc). Mention extraction of additional data from travis torrent and commit guru. Why we wanted travis torrent data (for CI data), why we needed commit guru data (to have additional data on the commit (bug) history.
 \subsection{Data Filtering}
-The mining challenge dataset composed of fixes to Java simple bugs. Two versions of this dataset are presented. In this paper, we study the small version of the dataset that contains 25,539 single-statement bug-fix changes mined from 100 popular open-source Java Maven projects. However, not all projects were suitable for our research. Therefore, we first filter the repositories as described in the steps below. \\ 
+The mining challenge dataset (SOURCE) is composed of fixes to Java simple bugs. Two versions of this dataset are presented. In this paper, we study the small version of the dataset that contains 25,539 single-statement bug-fix changes mined from 100 popular open-source Java Maven projects. However, not all projects were suitable for our research. Therefore, we first filter the repositories as described in the steps below. \\ 
 \textbf{DF 1: Select all available projects.} The first step to our study was to select all distinct projects available from the mining challenge data set. Of the 100 projects mentioned in the small data set, we obtained 84 projects from querying the set for distinct project names. \\
-\textbf{DF 2: Filter unsuitable projects. \\}
-\textbf{DF 3: some text \\}
+\textbf{DF 2: Select projects with CI data.} \\ To conduct our analysis, we must select repositories with available CI data. To maximize the size of the selected projects set, we decide to opt for projects who have adopted Travis CI. For this, we query the TravisTorrent (SOURCE) dataset for the projects selected in DF 1. We find that 34 projects from the mining challenge dataset have available CI data in TravisTorrent.\\
+\textbf{DF 3: Filter unsuitable projects.} From the 34 candidate projects with available CI data, we select those with at least 7 of the 16 bug types as described in the first column in Table \ref{tab:lifespan}. This results in a final studied system of 15 projects. \\ 
 
 \subsection{Data Analysis}
-some text \\
+After filtering the raw dataset, we are left with a final set of 15 projects with 1,284 distinct bug fix commits corresponding to at least 7 of the 16 bug types presented in the initial set. 
 \textbf{DA 1: some text \\}
 \textbf{DA 2: some text \\}
 \textbf{DA 3: some text \\}
@@ -148,8 +146,8 @@ In this section, we present the results of our case study with respect to the th
                                             & Fail  & 10\% & 60\%         & 20\%         & 20\%     \\
                                             & Error & 36\% & 6\%          & 16,67\%      & 77,78\%  \\ \hline
 \end{tabular}
-\label{tab:bugintro}
 \caption{Build status of Travis CI builds at bug-inducing commit introduction. \\ (Traceability--50 builds)}
+\label{tab:bugintro}
 \end{table*}
 
 % Please add the following required packages to your document preamble:
@@ -163,8 +161,8 @@ In this section, we present the results of our case study with respect to the th
                                    & Fail  & 5,26\%  & 33\%         & 0\%          & 66,67\%  \\
                                    & Error & 5,26\%  & 0\%          & 33,33\%      & 66,67\%  \\ \hline
 \end{tabular}
-\label{tab:beforefix}
 \caption{Build Status of Travis CI builds before the fix commit is introduced. \\ (Traceability--57 builds)}
+\label{tab:beforefix}
 \end{table*}
 
 \begin{table*}[t]
@@ -176,8 +174,8 @@ In this section, we present the results of our case study with respect to the th
                                    & Fail  & 12,02\% & 34,09\%      & 20,45\%      & 45,45\%  \\
                                    & Error & 4,64\%  & 0\%          & 23,53\%      & 76,47\%  \\ \hline
 \end{tabular}
-\label{tab:afterfix}
 \caption{Build Status of Travis CI builds after the fix commit is introduced. \\ (Traceability--366 builds)}
+\label{tab:afterfix}
 \end{table*}
 
 \begin{table*}[t]
@@ -201,8 +199,8 @@ MORE\_SPECIFIC\_IF                 & -                       & -                
 ADD\_THROWS\_EXCEPTION             & -                       & -                      & -                                              \\
 CHANGE\_OPERATOR                   & -                       & -                      & -                                              \\ \hline
 \end{tabular}
-\label{tab:lifespan}
 \caption{Average and Median Lifespan per Bug Type.}
+\label{tab:lifespan}
 \end{table*}
 
 \section{Conclusions}
