@@ -182,3 +182,32 @@ CI is meant to conduct "checks" and helps catch bugs quickly, we want to know if
 - Why are they not caught? - tests coverage, some just don't fail, some just no tests, etc. 
 
 Challenges and possible threats to validity: traceability is difficult (map bug fix - bug induce lose a lot of data, bugs might not be very severe so the build doesn't fail --> they end up living in the code for a long time)
+
+# 2020-01-22
+
+- Mention that this paper is part of the MSR challenge
+- Start using name of the dataset
+- Rearrange the process diagram (font and content to match the data analysis and filtering section)
+
+## Data Filtering 
+
+- DF 1 is not select all projects --> while it was reported 100 projects, we only found 84. Then start the steps. 
+  - So basically, df 2 becomes df 1. and so on...
+- Filter unsuitable projects - rephrase that 
+  - Filter project for diversity of bugs, limited time and resources, we selected 15 projects. don't mention suitability, don't mention computational power. 
+
+## RQ 1
+
+- Motivation: if bug not captured at introduction, we want to see if it was caught along the way. 
+- Cross reference data sets based on commit hash 
+- Bug inducing commits that did not trigger a CI - we dont talk enough about that. Practices of some projects may have limited that. % limitation - commit guru - how many bugs we can find
+- Talk about commits that trigger the CI. 
+- How many bug inducing commits are caught by CI (50) 
+- If bug was caught in the first stage, it wouldnt need to be caught later on. 
+- Why more failures after fix? Sometimes, bug fixing introduces other bugs, sometimes pipelines are not reliable. 
+- A build may contain more commits than just the ones relating to bugs
+- Include tests that failed - not related to actual bug 
+
+## RQ2
+
+No test coverage. Failed tests not related to the actual bug. 
