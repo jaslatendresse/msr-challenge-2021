@@ -210,4 +210,45 @@ Challenges and possible threats to validity: traceability is difficult (map bug 
 
 ## RQ2
 
-No test coverage. Failed tests not related to the actual bug. 
+No test coverage. Failed tests not related to the actual bug.
+
+
+
+# 2020-01-25
+
+Introduction: CI not just building, it improves quality - why we focus on CI? put citations 
+
+Describe the approach in the introduction. 
+
+Despite huge benefits of CI, no work was done with single-statment bugs: 
+
+Preliminary analysis: data on the chosen data (commits, contributors, maturity) 
+
+Get the commit message for fix commits. 
+
+After the builds fail, does phase b have more tests than phase a? -- see travis set. (RQ2) 
+
+Be more clear about phase a and b
+
+phase a: bug inducing commit
+
+a + b: single statement bug
+
+Table 1: needs to go. 
+
+RQ2: from the builds that fail, how many captured the bug? 
+
+Phase (c) should be removed? 
+
+Update RQ 2 summary in introduction. 
+
+RQ 2 talk about phase a and phase b. 
+
+Make a pipeline diagram to show when bug was introduced and before it was fixed --> RQ 1 should be about single-statement bugs, not just bug-inducing commits 
+
+After fix (phase c) analyze nb tests introduced. 
+
+
+
+
+
