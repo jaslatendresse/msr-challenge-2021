@@ -75,16 +75,16 @@ def main():
     database = r"../sqlite/db/msr_db.db"
     
     gh_commits_query = 'SELECT gh_commits_in_push FROM selected_travis GROUP BY gh_commits_in_push'
-    create_push_commits_list(database, gh_commits_query, 'docs/gh_commits_in_push.txt')
+    create_push_commits_list(database, gh_commits_query, 'data/gh_commits_in_push.txt')
 
     not_pr_query = 'SELECT fixCommitSha1 FROM selected_sstubs LEFT JOIN selected_travis WHERE gh_is_pr = "False" AND fixCommitSHA1 = git_trigger_commit GROUP BY fixCommitSha1'
-    create_commit_list(database, not_pr_query, 'docs/not_a_pr_commit.txt')
+    create_commit_list(database, not_pr_query, 'data/not_a_pr_commit.txt')
 
     selected_sstubs_commits_query = 'SELECT fixCommitSha1 FROM selected_sstubs GROUP BY fixCommitSha1'
-    create_commit_list(database, selected_sstubs_commits_query, 'docs/selected_sstubs_commits.txt')
+    create_commit_list(database, selected_sstubs_commits_query, 'data/selected_sstubs_commits.txt')
 
     print('distinct NON-PR commits that are part of commits in a PR that has triggered a build: ')
-    parse_commits('docs/not_a_pr_commit.txt', 'docs/gh_commits_in_push.txt')
+    parse_commits('data/not_a_pr_commit.txt', 'data/gh_commits_in_push.txt')
     
 
 if __name__ == '__main__':

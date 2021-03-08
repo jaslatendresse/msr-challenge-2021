@@ -67,25 +67,25 @@ def main():
     database = r"../sqlite/db/msr_challenge.db"
     
     # JSON files
-    sstubs = 'docs/json-data/sstubs.json'
-    selected_travis = 'docs/json-data/selected_travis.json'
-    selected_sstubs = 'docs/json-data/selected_sstubs.json'
+    sstubs = 'data/json-data/sstubs.json'
+    selected_travis = 'data/json-data/selected_travis.json'
+    selected_sstubs = 'data/json-data/selected_sstubs.json'
 
     # CSV files
-    apache_flink = 'docs/commit-guru/apache-flink.csv'
-    apache_storm = 'docs/commit-guru/apache-storm.csv'
-    checkstyle = 'docs/commit-guru/checkstyle.csv'
-    closure_compiler = 'docs/commit-guru/closure-compiler.csv'
-    dropwizard_dropwizard = 'docs/commit-guru/dropwizard-dropwizard.csv'
-    dropwizard_metrics = 'docs/commit-guru/dropwizard-metrics.csv'
-    druid = 'docs/commit-guru/druid.csv'
-    google_guice = 'docs/commit-guru/google-guice.csv'
-    graylog2 = 'docs/commit-guru/graylog2.csv'
-    jedis = 'docs/commit-guru/jedis.csv'
-    junit = 'docs/commit-guru/junit-team-junit.csv'
-    mybatis = 'docs/commit-guru/mybatis-mybatis-3.csv'
-    naver = 'docs/commit-guru/naver-pinpoint.csv'
-    presto = 'docs/commit-guru/presto.csv'
+    apache_flink = 'data/commit-guru/apache-flink.csv'
+    apache_storm = 'data/commit-guru/apache-storm.csv'
+    checkstyle = 'data/commit-guru/checkstyle.csv'
+    closure_compiler = 'data/commit-guru/closure-compiler.csv'
+    dropwizard_dropwizard = 'data/commit-guru/dropwizard-dropwizard.csv'
+    dropwizard_metrics = 'data/commit-guru/dropwizard-metrics.csv'
+    druid = 'data/commit-guru/druid.csv'
+    google_guice = 'data/commit-guru/google-guice.csv'
+    graylog2 = 'data/commit-guru/graylog2.csv'
+    jedis = 'data/commit-guru/jedis.csv'
+    junit = 'data/commit-guru/junit-team-junit.csv'
+    mybatis = 'data/commit-guru/mybatis-mybatis-3.csv'
+    naver = 'data/commit-guru/naver-pinpoint.csv'
+    presto = 'data/commit-guru/presto.csv'
 
     # Commits from the original Sstubs dataset 
     create_table(sstubs, database, 'sstubs')

@@ -3,7 +3,7 @@ import glob
 
 def merge_json():
     glob_data = []
-    for file in glob.glob('docs/travistorrent/*.json'):
+    for file in glob.glob('data/travistorrent/*.json'):
         with open(file) as json_file:
             data = json.load(json_file)
             i = 0
@@ -11,7 +11,7 @@ def merge_json():
                 glob_data.append(data[i])
                 i += 1
 
-    with open('docs/json-data/selected_travis.json', 'w') as f:
+    with open('data/json-data/selected_travis.json', 'w') as f:
         json.dump(glob_data, f, indent=4)
 
 def select_sstubs():
@@ -21,11 +21,11 @@ def select_sstubs():
     'google.guice', 'junit-team.junit']
     input_dict = []
     output_dict = []
-    with open('docs/json-data/sstubs.json') as f:
+    with open('data/json-data/sstubs.json') as f:
         input_dict = json.load(f)
         output_dict = [d for d in input_dict if (d['projectName'] in project_list)]
 
-    with open('docs/json-data/selected_sstubs.json', 'w') as outfile:
+    with open('data/json-data/selected_sstubs.json', 'w') as outfile:
         json.dump(output_dict, outfile, indent = 4)
     
 
